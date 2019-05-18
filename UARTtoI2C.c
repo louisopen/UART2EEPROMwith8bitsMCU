@@ -1,7 +1,7 @@
 //___________________________________________________________________
 //___________________________________________________________________
 //   Copyright: 2019 For MK Master INC.
-//   File Name: Main program
+//   File Name: Main program of the application
 // Description: 
 //Targer Board: 
 //    MCU Body: HT66F318 28ssop
@@ -22,7 +22,9 @@ void main()
 	if(_to ==0 || _pdf ==0)									//WDT1	Reset
 	{	
 		//上電復位或者是正常情況下的非正常復位
-		fun_PowerOnInit();	                                   								
+		//RAM
+		fun_RamInit();
+		fun_PowerOnInit();	//第一次上電或正常reset pin                             								
 	}
 	else													
 	{

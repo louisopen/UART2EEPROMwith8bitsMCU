@@ -4,15 +4,14 @@
 //  File Name : EEPROM.c
 // Description: EEPROMÅª¼g¤lµ{§Ç
 //Targer Board: None
-//   MCU      : BH67F2260
-//   Author   : ming
-//   Date     : 2015/11/20
+//   MCU      : HT66F318
+//   Author   : 
+//   Date     : 2019
 //   Version  : V00
 //   History  :
 //___________________________________________________________________
 //___________________________________________________________________
 #include "common.h"
-
 
 /********************************************************************
 Function:Read_EEPROM

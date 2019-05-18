@@ -1,5 +1,5 @@
 
-Linker Version 8.7.6.180315
+Linker Version 8.7.7.181224
 Input Object File: C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UARTTOI2C.OBJ
 Input Object File: C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\STARTUP1_L.OBJ
 Input Object File: C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UART.OBJ
@@ -13,11 +13,11 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      Bank    Start     End      Length     Class    AvgIns    Name
      00h     0000h     0000h    0001h      CODE               @code (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UARTTOI2C.OBJ)
      00h     0001h     0001h    0001h      CODE               @start (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UARTTOI2C.OBJ)
-     00h     0002h     000bh    000ah      CODE               _main (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UARTTOI2C.OBJ)
-     00h     000ch     0013h    0008h      CODE               _Uart_Init (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UART.OBJ)
-     00h     0014h     002ah    0017h      CODE               _fun_ResetInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
-     00h     002bh     003fh    0015h      CODE               _fun_RamInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
-     00h     0040h     0046h    0007h      CODE               _fun_PowerOnInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
+     00h     0002h     000ch    000bh      CODE               _main (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UARTTOI2C.OBJ)
+     00h     000dh     0014h    0008h      CODE               _Uart_Init (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UART.OBJ)
+     00h     0015h     002bh    0017h      CODE               _fun_ResetInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
+     00h     002ch     0031h    0006h      CODE               _fun_PowerOnInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
+     00h     0032h     0046h    0015h      CODE               _fun_RamInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
      00h     00a0h     00afh    0010h      DATA     1.75      @HCCINIT0 (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UART.OBJ)
 
      Local Sections
@@ -25,19 +25,19 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      Bank    Start     End      Length     Class    AvgIns    Name
      00h     00b0h     00b0h    0000h      LOCAL    0         @dummy (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UARTTOI2C.OBJ)
      00h     00b0h     00b0h    0000h      LOCAL    0         _main (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UARTTOI2C.OBJ)
-     00h     00b0h     00b0h    0000h      LOCAL    0         _fun_PowerOnInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
      00h     00b0h     00b0h    0000h      LOCAL    0         _fun_RamInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
+     00h     00b0h     00b0h    0000h      LOCAL    0         _fun_PowerOnInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
      00h     00b0h     00b0h    0000h      LOCAL    0         _fun_ResetInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
      00h     00b0h     00b0h    0000h      LOCAL    0         _Uart_Init (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UART.OBJ)
 
      Public Symbols Information
      Address            Public by Name
-     000ch              _Uart_Init
+     000dh              _Uart_Init
      00a0h              _array_uart_rxbuff
      00a6h              _array_uart_txbuff
-     0040h              _fun_PowerOnInit
-     002bh              _fun_RamInit
-     0014h              _fun_ResetInit
+     002ch              _fun_PowerOnInit
+     0032h              _fun_RamInit
+     0015h              _fun_ResetInit
      00afh              _gu8v_rx_guide
      00aeh              _gu8v_tx_guide
      00adh              _gu8v_uart_flag
@@ -45,10 +45,10 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
 
      Address            Public by Value
      0002h              _main
-     000ch              _Uart_Init
-     0014h              _fun_ResetInit
-     002bh              _fun_RamInit
-     0040h              _fun_PowerOnInit
+     000dh              _Uart_Init
+     0015h              _fun_ResetInit
+     002ch              _fun_PowerOnInit
+     0032h              _fun_RamInit
      00a0h              _array_uart_rxbuff
      00a6h              _array_uart_txbuff
      00adh              _gu8v_uart_flag
@@ -74,8 +74,8 @@ _fun_PrepareToHalt: 1
 Call Tree
     @dummy
         _main (0)
+            _fun_RamInit (1)
             _fun_PowerOnInit (1)
-                _fun_RamInit (2)
                 _fun_ResetInit (2)
                     _Uart_Init (3)
             _fun_ResetInit (1)

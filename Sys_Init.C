@@ -3,10 +3,10 @@
 //  Copyright : 2015 BY HOLTEK SEMICONDUCTOR INC
 //  File Name : sys_init.c
 // Description: 系統初始化相關程序
-//Targer Board: 
-//   MCU      : BH67F2260
-//   Author   : ming
-//   Date     : 2015/11/20
+//Targer Board: None
+//   MCU      : HT66F318
+//   Author   : 
+//   Date     : 2019
 //   Version  : V00
 //   History  :
 //___________________________________________________________________
@@ -20,7 +20,7 @@ INPUT	:
 OUTPUT	:
 NOTE	:
 ********************************************************************/
-void fun_ResetInit()
+void fun_ResetInit()	//WDT 溢出復位
 {
 		//IO
 	fun_GPIO();
@@ -70,9 +70,6 @@ NOTE	:
 ********************************************************************/
 void fun_PowerOnInit() //第一次上電或正常reset pin
 {
-	//RAM
-	fun_RamInit();
-	
 	//Fsys used fH so don't setting SMOD 
    	//SETHIRC_12MHZ();	//internal
   	//SETLXT_32768(); 	//external 

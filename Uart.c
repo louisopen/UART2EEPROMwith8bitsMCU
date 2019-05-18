@@ -2,11 +2,11 @@
 //___________________________________________________________________
 //  Copyright : 2015 BY HOLTEK SEMICONDUCTOR INC
 //  File Name : Uart.c
-// Description: 
-//Targer Board: 
-//   MCU      : BH67F2260
-//   Author   : ming
-//   Date     : 2015/11/23
+// Description: UART or RS-485
+//Targer Board: None
+//   MCU      : HT66F318
+//   Author   : 
+//   Date     : 2019
 //   Version  : V00
 //   History  :
 //___________________________________________________________________
