@@ -1,10 +1,10 @@
 //___________________________________________________________________
 //___________________________________________________________________
-//  Copyright : 2015 BY HOLTEK SEMICONDUCTOR INC
-//  File Name : sys_init.c
 // Description: 系統初始化相關程序
+//  Copyright : 2015 BY HOLTEK SEMICONDUCTOR INC
+//  File Name : Sys_Init.c
 //Targer Board: None
-//   MCU      : HT66F318
+//   MCU      : HT66F318 
 //   Author   : 
 //   Date     : 2019
 //   Version  : V00
@@ -13,42 +13,35 @@
 //___________________________________________________________________
 #include "common.h"
 
-
 /********************************************************************
-Function: MCU復位初始化
+Function: MCU WDT復位初始化
 INPUT	:
 OUTPUT	:
 NOTE	:
 ********************************************************************/
-void fun_ResetInit()	//WDT 溢出復位
+void fun_WDT_ResetInit()	//WDT 溢出復位
 {
-		//IO
-	fun_GPIO();
+	//IO
+	GPIO_Init();
  	Uart_Init();	
- 	//fun_PGA1_INIT(Pgac1_gain1_32,16);
- 	//fun_PGA2_INIT();
- 	//fun_SCF_INIT(32);
- 	//fun_CCurrent_INIT();
 	//fun_En_Analog_power();
 	//fun_Enable_ADC();
- 	//ptm2
- 	SETPTM2_10MS();
- 	_t2on  = 1;	
- 	
- 	//TimeBase 
- 	_tbc = TimeBase0_Default;
- 	//_tb1c = TimeBase1_Default;
- 	//_pscr = 0x03;//	time base click = fsub
-	//_tbon = 1;
- 	//_tbck = 0;
-
 	
-	_tm0c0 = STM0C0_Default;
-	_tm0c1 = STM0C1_Default;
-	_tm0al = STM0AL_Default;//;占空比
-	_tm0ah = STM0AH_Default;
-	_tm0rp = STM0RP_Default;//4*256 周期	
+ 	//ptm2 only for HT66F318
+ 	//SETPTM2_10MS();
+ 	//_t2on  = 1;	
+ 	
+ 	//TimeBase 0/1
+ 	_tbc = TimeBase_Default;
+	_tb0e = 1;	//enable TB0 interrupt
+	//_tb1e = 1;	//enable TB1 interrupt
 
+	//Timer Control	
+	_tm0c0 = TM0C0_Default;
+	_tm0c1 = TM0C1_Default;
+	_tm0al = PTM0AL_Default;	//;占空比
+	_tm0ah = PTM0AH_Default;
+	_tm0rp = PTM0RP_Default;	//4*256 周期  應該有10bits	????	
 	
   	_nop();
   	//_pgc0 = 0;
@@ -59,7 +52,7 @@ void fun_ResetInit()	//WDT 溢出復位
 	//fun_en_battery_check();
 	//gbv_bat_low = 0;
 	//gu8v_battery_votage = 0;
-	_emi  = 1;	//開啟TimeBase 1作為喚醒檢測
+	_emi  = 1;	//開啟中斷
 	
 }
 /********************************************************************
@@ -70,19 +63,18 @@ NOTE	:
 ********************************************************************/
 void fun_PowerOnInit() //第一次上電或正常reset pin
 {
-	//Fsys used fH so don't setting SMOD 
-   	//SETHIRC_12MHZ();	//internal
-  	//SETLXT_32768(); 	//external 
+  	SETHXT();	//fH source is external Hi speed
   	
-	//WDT
-	SETWDTtime8192ms();		//WDT timer or disable.
-	
-	//LVR
+	//LVR low voltage reset select
 	//SETLVR_Voltage1_9();
-	SETLVR_Voltage3_15();
+	SETLVR_Voltage2_55();
+	//SETLVR_Voltage3_15();
+
+	//WDT select
+	SETWDTtime8192ms();		//WDT timer enable.
 	
-	//IO
-	fun_ResetInit();
+	//GPIO control
+	fun_WDT_ResetInit();
 //	fun_CAL_REEPROM();
 //	fun_init_time();	
 }
@@ -157,14 +149,13 @@ void fun_PrepareToHalt()
 //Run :Fs,Fsub
 
 
-
 /********************************************************************
 Function: GPIO初始化
 INPUT	: none
 OUTPUT	: none
 NOTE	: 所有IO config為輸出low
 ********************************************************************/
-void fun_GPIO()
+void GPIO_Init()
 {/*
 	_pac = 0b11100111;
 	_papu = 0b11100111;	
@@ -196,41 +187,28 @@ void fun_GPIO()
 	
 }
 /********************************************************************
-Function:Ram_Init
+Function:fun_Ram_Init
 INPUT	:
 OUTPUT	:
-NOTE	:HT66F317 (80h~FFh), HT66F318(A0h~FFh), Bank0,bank1
+NOTE_1	:HT66F317 Bank0(80h~FFh)
+NOTE_2	:HT66F318 Bank0(A0h~FFh), bank1(A0h~FFh)
 ********************************************************************/
 void fun_RamInit()
 {
 	_bp = 0;
-	_mp1 = 0xA0;
-	//while(_mp1h<RamBankSectorSum)
-	while(_mp1<2)	//HT66F318 bank0,bank1
+	//_mp1 = 0x80;	//HT66F317
+	_mp1 = 0xA0;	//HT66F318
+	//while(_mp1<1)	//HT66F317 bank0(80h~FFh) 128bytes
+	while(_mp1<2)	//HT66F318 bank0(A0h~FFh),bank1(A0h~FFh) 192bytes
 	{
-		for(_tblp = 0x00;_tblp < 128;_tblp++)
+		//for(_tblp = 0x00;_tblp < 128;_tblp++)	//HT66F317 128
+		for(_tblp = 0x00;_tblp < 96;_tblp++) //HT66F318 96x2
 		{
 			 _iar1 = 0;
 			  _mp1++;
 		}
-		_mp1 = 0xA0;		
+		_mp1 = 0xA0;	//HT66F317 don't care
 		_bp = 1;
 	}
 	_bp = 0;		
 }
-/*
-void fun_RamInit()
-{
-	_mp1 = 0x80;
-	//while(_mp1<RamBankSectorSum)
-	while(_mp1<1)	//HT66F317 bank0
-	{
-		for(_tblp = 0x00;_tblp < 128;_tblp++)
-		{
-			 _iar1 = 0;
-			  _mp1++;
-		}
-		_mp1 = 0x80;		
-	}		
-}
-*/

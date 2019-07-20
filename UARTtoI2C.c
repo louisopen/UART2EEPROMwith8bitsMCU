@@ -1,9 +1,9 @@
 //___________________________________________________________________
 //___________________________________________________________________
+// Description: Main program
 //   Copyright: 2019 For MK Master INC.
-//   File Name: Main program of the application
-// Description: 
-//Targer Board: 
+//   File Name: UARTtoI2C.c
+//Targer Board: MK8002D 
 //    MCU Body: HT66F318 28ssop
 //      Author: Louis Huang
 //        Date: 2019/05/18
@@ -22,16 +22,15 @@ void main()
 	if(_to ==0 || _pdf ==0)									//WDT1	Reset
 	{	
 		//上電復位或者是正常情況下的非正常復位
-		//RAM
-		fun_RamInit();
+		fun_RamInit();	//RAM clear all.
 		fun_PowerOnInit();	//第一次上電或正常reset pin                             								
 	}
 	else													
 	{
-		//WDT 溢出復位
-		fun_ResetInit();
+		//WDT復位
+		fun_WDT_ResetInit();
 	}
-  //  TEST_LCD()  ;   
+  	//main loop here
 	while(1)
 	{	
 		//清除看門狗

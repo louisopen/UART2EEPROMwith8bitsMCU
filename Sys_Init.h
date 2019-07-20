@@ -1,12 +1,12 @@
 //___________________________________________________________________
 //___________________________________________________________________
+// Description: 系統初始化相關程序
 //  Copyright : 2015 BY HOLTEK SEMICONDUCTOR INC
 //  File Name : sys_init.h
-// Description: 系統初始化相關程序
 //Targer Board: 
-//   MCU      : BH67F2260
-//   Author   : ming
-//   Date     : 2015/11/20
+//   MCU      : HT66F317 HT66F318
+//   Author   : Louis Huang
+//   Date     : 2019/07/20
 //   Version  : V00
 //   History  :
 //___________________________________________________________________
@@ -14,127 +14,63 @@
 #ifndef SYS_INIT_H_
 #define SYS_INIT_H_
 
-
 void fun_PowerOnInit();
-void fun_ResetInit();
-void fun_GPIO();
+void fun_WDT_ResetInit();
+void GPIO_Init();
 void fun_RamInit();
-//void fun_SysInit();
 void fun_PrepareToHalt();
-//void STP_PUMP_SET();
 
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@ 系統基礎設定 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//  可選頻率有
-//  4000000,8000000，120000
-#define SysFrequency		12000000
+//  HIRC可選頻率有(options HXT or HIRC)
+//  4000000，8000000，120000  by hardware option if select HIRC
+#define OSC_Frequency		8000000
 
 
-
-//					@-------------SCC config--------------@
+//					@-------------SMOD config--------------@
 //  ______________________________________________________________________________
 // | Bit  |  Bit7  |  Bit6  |  Bit5  |  Bit4  |  Bit3  |  Bit2  |  Bit1  |  Bit0  |
 //  ______________________________________________________________________________
-// | Name |  CKS2  |  CKS1  |  CKS0  |  —     |  FHS   |  FSS   | FHIDEN | FSIDEN |
+// | Name |  CKS2  |  CKS1  |  CKS0  |  FSTEN |  LTO   |  HTO   | IDLEN  | HLCLK  |
 // |______________________________________________________________________________
-// | POR  |   0    |   0    |   0    |   0    |   0    |   0    |   0    |   0    |
+// | POR  |   0    |   0    |   0    |   0    |   0    |   0    |   1    |   1    |
 // |_______________________________________________________________________________
 // Bit 7~5 CKS2~CKS0：
-// 000：fH 001：fH/2 010：fH/4 011：fH/8 100：fH/16 101：fH/32 110：fH/64 111：fSUB
-// Bit 3 FHS：
-// 	0：HIRC  1：HXT
-// Bit 2 FSS：
-// 	0：LIRC  1：LXT
-// Bit 1 FHIDEN：HALT MODLE
+// 000: fSUB (fLXT or fLIRC) 001: fSUB (fLXT or fLIRC) 010: fH/64 011: fH/32 100: fH/16 101: fH/8 110: fH/4 111: fH/2
+// Bit 3 LTO：
+// 	0：Not ready  1：ready
+// Bit 2 HTO：
+// 	0：Not ready  1：ready
+// Bit 1 IDLEN：IDEL mode control
 // 	0：DISABLE  1：ENABLE
-// Bit 0 FSIDEN：CPU???低?振?器控制位
-// 	0：DISABLE  1：ENABLE
+// Bit 0 HLCLK：system clock selection
+// 	0：fH/2 ~ fH/64 or fSUB  1：fH
+#define SMOD_Default		0b11110011  
 
-#define SCC_Default		0b00000000   // fH HIRC LIRC 
-
+#define SETHXT()	{_cks2 = 1;_cks1 = 1;_cks0 = 1;_fsten = 1;_idlen = 1;_hlclk = 1;}
    
-//					@-------------HIRCC config--------------@
-//  ______________________________________________________________________________
-// | Bit  |  Bit7  |  Bit6  |  Bit5  |  Bit4  |  Bit3  |  Bit2  |  Bit1  |  Bit0  |
-//  ______________________________________________________________________________
-// | Name |  CKS2  |  CKS1  |  CKS0  |  —     |  HIRC1 |  HIRC0 | HIRCF  | HIRCEN |
-// |______________________________________________________________________________
-// | POR  |   0    |   0    |   0    |   0    |   0    |   0    |   0    |   1    |
-// |_______________________________________________________________________________
-
-// Bit 3~2 HIRC1~HIRC0：HIRC
-// 	00：4MHz 01：8MHz 10：12MHz 11：4MHz
-// Bit 1 HIRCF：
-// 	0：HIRC 1：HIRC
-// Bit 0 HIRCEN：
-// 	0：DISABLE
-// 	1：ENABLE
-#define HIRCC_Default		0b00000101   // 8 mhz 
-
-
-
-  
-//					@-------------HXTC config--------------@
-//  ______________________________________________________________________________
-// | Bit  |  Bit7  |  Bit6  |  Bit5  |  Bit4  |  Bit3  |  Bit2  |  Bit1  |  Bit0  |
-//  ______________________________________________________________________________
-// | Name |  —     |  —     |  —     |  —     |  —     |  HXTM  |   HXTF | FSIDEN |
-// |______________________________________________________________________________
-// | POR  |   0    |   0    |   0    |   0    |   0    |   0    |   0    |   0    |
-// |_______________________________________________________________________________
-// Bit 2 HXTM：
-// 	0：HXT ? 10MHz  1：HXT ﹥ 10MHz
-// Bit 0 HXTEN：
-// 	0：DISABLE  1：ENABLE
-#define HXTC_Default		0b00000000   //
-
-
-
-//					@-------------LXTC config--------------@
-//  ______________________________________________________________________________
-// | Bit  |  Bit7  |  Bit6  |  Bit5  |  Bit4  |  Bit3  |  Bit2  |  Bit1  |  Bit0  |
-//  ______________________________________________________________________________
-// | Name |  —     |  —     |  —     |  —     |  —     |  —     |   LXTF | LXTEN  |
-// |______________________________________________________________________________
-// | POR  |   0    |   0    |   0    |   0    |   0    |   0    |   0    |   0    |
-// |_______________________________________________________________________________
-// Bit 2 HXTM：
-// 	0：HXT ? 10MHz  1：HXT ﹥ 10MHz
-// Bit 0 HXTEN：
-// 	0：DISABLE  1：ENABLE
-#define LXTC_Default		0b00000000   //
-
-
-#define SETHIRC_8MHZ()	{_fhs = 0;_hirc1 = 0;_hirc0 = 0;_hircen = 1;}
-#define SETHIRC_12MHZ()	{_fhs = 0;_hirc1 = 0;_hirc0 = 1;_hircen = 1;}
-#define SETHIRC_16MHZ()	{_fhs = 0;_hirc1 = 1;_hirc0 = 0;_hircen = 1;}
-
-#define SETLIRC_32K()		{_fss = 0;}
-
-#define SETHXT()			{_fhs = 1;_pas07 = 1;_pas06 = 1;_pas11 = 1;_pas10 = 1;_hxten = 1;}
-#define SETLXT_32768()		{_fss = 1;_pas05 = 1;_pas04 = 1;_pas01 = 1;_pas00 = 1;_lxten = 1;}
-
-#define SETLXT_32768_1()	{_fss = 1;_pas05 = 0;_pas04 = 0;_pas01 = 0;_pas00 = 0;_lxten = 1;}
+//#define SETHIRC_8MHZ()	{_fhs = 0;_hirc1 = 0;_hirc0 = 0;_hircen = 1;}
+//#define SETHIRC_12MHZ()	{_fhs = 0;_hirc1 = 0;_hirc0 = 1;_hircen = 1;}
+//#define SETHIRC_16MHZ()	{_fhs = 0;_hirc1 = 1;_hirc0 = 0;_hircen = 1;}
 
 
 //					@-------------WDT config--------------@
 //___________________________________________________________________
 //Please in Option select WDT clock Source
 //if WDT clock Source fs =fsub
-//WDT time?算方式:
+//WDT time計算方式:
 //WDT time =  2^18/fsub
-//example:(max time 周期最?2^18，Source fs = 32768)
+//example:(max time 周期最長2^18，Source fs=32768) or fs=32K (LIRC)
 //WDT time = 2^18/32768= 8s
-
 #define SETWDT_Disable()			{ 	_wdtc =	0B10101000	;	}
-#define SETWDTtime8ms()				{	_wdtc =	0B01010000 	;	} //2^8/Fs  =    8ms
-#define SETWDTtime32ms()			{	_wdtc =	0B01010001	;	}//2^10/Fs =   32ms
-#define SETWDTtime128ms()			{	_wdtc =	0B01010010 	;	}	//2^12/Fs =  128ms
-#define SETWDTtime512ms()			{	_wdtc =	0B01010011	;	}//2^14/Fs =  512ms
-#define SETWDTtime1024ms()			{	_wdtc =	0B01010100 	;	}	//2^15/Fs = 1024ms
-#define SETWDTtime2048ms()			{	_wdtc =	0B01010101	;	}//2^16/Fs = 2048ms
-#define SETWDTtime4096ms()			{	_wdtc =	0B01010110	;	}//2^17/Fs = 4096ms
-#define SETWDTtime8192ms()			{	_wdtc =	0B01010111	;	}	//2^18/Fs = 8192ms
+#define SETWDTtime8ms()				{	_wdtc =	0B01010000 	;	}// 2^8 /Fs =    8ms
+#define SETWDTtime32ms()			{	_wdtc =	0B01010001	;	}// 2^10/Fs =   32ms
+#define SETWDTtime128ms()			{	_wdtc =	0B01010010 	;	}// 2^12/Fs =  128ms
+#define SETWDTtime512ms()			{	_wdtc =	0B01010011	;	}// 2^14/Fs =  512ms
+#define SETWDTtime1024ms()			{	_wdtc =	0B01010100 	;	}// 2^15/Fs = 1024ms
+#define SETWDTtime2048ms()			{	_wdtc =	0B01010101	;	}// 2^16/Fs = 2048ms
+#define SETWDTtime4096ms()			{	_wdtc =	0B01010110	;	}// 2^17/Fs = 4096ms
+#define SETWDTtime8192ms()			{	_wdtc =	0B01010111	;	}// 2^18/Fs = 8192ms
 
 
 
@@ -167,37 +103,40 @@ void fun_PrepareToHalt();
 //					@-------------Timer config-----------@
 //Setting in Timer.h
 
- 
-//                           @--------------PTMnC0---------------@
+
+//TMnC0 (PTM, n=0 or n=1) for HT66F317 & HT66F318
+//                  @---------------PTMnC0---------------@
 //  ______________________________________________________________________________
 // | Bit  |  Bit7  |  Bit6  |  Bit5  |  Bit4  |  Bit3  |  Bit2  |  Bit1  |  Bit0  |
 //  ______________________________________________________________________________
-// | Name | PTnPAU | PTnCK2 | PTnCK1 | PTnCK0 |  PTnON |    -   |    -   |    -   |
+// | Name |  TnPAU |  TnCK2 |  TnCK1 |  TnCK0 |  TnON  |    -   |    -   |    -   |
 // |______________________________________________________________________________
 // | POR  |   0    |   0    |   0    |   0    |   0    |   0    |   0    |   0    |
 // |_______________________________________________________________________________
 // BIT 7  TnPAU:TMn計數器暫停控制位
 // 			0:  運行
 //			1:  暫停
-// BIT 6~4  TnCK2~TnCK0:選擇TMn計數時鐘
-// 			000:  fsys/4   001:  fsys   010:   fh/16
-// 			011:  fh/64    100:  fsub   101:   保留位
-// 			110:  TCKn上升沿    111:  TCKn下降沿
-// BIT 3  TnON:TMn計數器on/off控制位
-// 			0:  off
-//			1:  on
-// BIT 2~0 
-
-
-
-//#define TM0C0_Default		0x30   // CLOCK  fsys/64
+// Bit 6~4 TnCK2~TnCK0: Select TMn Counter clock
+//			000: fSYS/4
+//			001: fSYS
+//			010: fH/16
+//			011: fH/64
+//			100: fTBC
+//			101: fH
+//			110: TCKn rising edge clock
+//			111: TCKn falling edge clock
+// Bit 3 TnON: TMn Counter On/Off Control
+//			0: Off
+//			1: On
 #define TM0C0_Default		0b01000000   // CLOCK  fsub
+#define TM1C0_Default		0b01000000
 
-//                           @--------------PTMnC1---------------@
+//TMnC1 (PTM, n=0 or n=1) for HT66F317 HT66F318
+//                  @--------------PTMnC1---------------@
 //  ______________________________________________________________________________
 // | Bit  |  Bit7  |  Bit6  |  Bit5  |  Bit4  |  Bit3  |  Bit2  |  Bit1  |  Bit0  |
 //  ______________________________________________________________________________
-// | Name |  TnM1  |  TnM0  |  TnIO1 |  TnIO0 |  TnOC  | TnPOL  | TnDPX  | TnCCLR |
+// | Name |  TnM1  |  TnM0  |  TnIO1 |  TnIO0 |  TnOC  |  TnPOL | TnCAPTS| TnCCLR |
 // |______________________________________________________________________________
 // | POR  |   0    |   0    |   0    |   0    |   0    |   0    |   0    |   0    |
 // |_______________________________________________________________________________
@@ -205,54 +144,186 @@ void fun_PrepareToHalt();
 // 			00:  比較器匹配輸出模式   01:未定義模式
 //			10:  PWM模式              11:定時/計數器模式
 // BIT 5~4  TnIO1~TnIO0:選擇TPn_0，TPn_1輸出功能位
-//比較匹配輸出模式
+//			比較匹配輸出模式
 // 			00:  無變化          01:  輸出低
 //			10:  輸出高          11:  輸出翻轉
-//PWM模式
+//			PWM模式
 // 			00:  強制無效狀態    01:  強制有效狀態
 //			10:  PWM輸出         11:  未定義
-//計數器/定時模式: 未定義
+//			計數器/定時模式: 未定義
 // BIT 3  TnOC
-// 比較匹配輸出模式             PWM模式
-// 			0:  初始低             0:  低有效
-//			1:  初始高             1:  高有效
+// 			比較匹配輸出模式     PWM模式
+// 			0:  初始低           0:  低有效
+//			1:  初始高           1:  高有效
 // BIT 2  TnPOL:TPn_0,TPn_1輸出極性控制位
 // 			0:  同相
 //			1:  反相
-// BIT 1  TnDPX: TMn PWM週期/占空比控制位
-// 			0:  CCRP-週期   ;CCRA-占空比
-//			1:  CCRP-占空比 ;CCRP-週期
+// Bit 1 TnCAPTS: TMn capture trigger source select
+//			0: From TPn pin
+//			1: From TCKn pin
 // BIT 0  TnCCLR:選擇TMn計數器清零條件位
 // 			0:  TMn比較器P匹配
 //			1:  TMn比較器A匹配
-#define TM0C1_Default		0xC1
-
-
+#define TM0C1_Default		0x00
+#define TM1C1_Default		0x00
 
 // #define TM0AL_Default		0xfa	
-// #define TM0AH_Default		0x0       // = 0.000008*250 = 2ms
+// #define TM0AH_Default		0x0      // = 0.000008*250 = 2ms
 // #define TM0AL_Default		0x47	
-// #define TM0AH_Default		0x1       	  // = 0.000008*250 = 2ms
-
+// #define TM0AH_Default		0x1      // = 0.000008*250 = 2ms
 #define TM0AL_Default		0x48	
-#define TM0AH_Default		0x1       	  // =  = 10ms
+#define TM0AH_Default		0x1       	// =  = 10ms
+#define TM1AL_Default		0x48	
+#define TM1AH_Default		0x1       	// =  = 10ms
+
+#define PTM0AL_Default		767%256	
+#define PTM0AH_Default		767/256    
+#define PTM1AL_Default		767%256	
+#define PTM1AH_Default		767/256	
+#define PTM0RP_Default		0			//8bit ????????
+#define PTM1RPL_Default		0			//10 bit
+#define PTM1RPH_Default		0
 
 
+//TMnC0 (STM, n=0) only for HT66F318
+//                  @---------------STMnC0---------------@
+//  ______________________________________________________________________________
+// | Bit  |  Bit7  |  Bit6  |  Bit5  |  Bit4  |  Bit3  |  Bit2  |  Bit1  |  Bit0  |
+//  ______________________________________________________________________________
+// | Name |  TnPAU |  TnCK2 |  TnCK1 |  TnCK0 |  TnON  |    -   |    -   |    -   |
+// |______________________________________________________________________________
+// | POR  |   0    |   0    |   0    |   0    |   0    |   0    |   0    |   0    |
+// |_______________________________________________________________________________
+// BIT 7  TnPAU:TMn計數器暫停控制位
+// 			0:  運行
+//			1:  暫停
+// Bit 6~4 TnCK2~TnCK0: Select TMn Counter clock
+//			000: fSYS/4
+//			001: fSYS
+//			010: fH/16
+//			011: fH/64
+//			100: fTBC
+//			101: fH
+//			110: TCKn rising edge clock
+//			111: TCKn falling edge clock
+// Bit 3 TnON: TMn Counter On/Off Control
+//			0: Off
+//			1: On
+#define TM0C0_Default		0b01000000   // CLOCK  fsub
 
-//#define	SETPTM2_10MS()		{ _ptm2c0 = 0b01000000;_ptm2c1 = 0xC1;_ptm2al = 0x48;_ptm2ah = 0x1;}
-#define	SETPTM2_10MS()		{ _tm2c0 = 0b01000000; _tm2c1 = 0xC1; _tm2al = 0x48; _tm2ah = 0x1;}
-
-
-#define STM0C0_Default		0b00000000   // CLOCK  fSYS
-#define STM0C1_Default		0B10100100
+//TMnC1 (STM, n=0) only for HT66F318
+//                  @--------------STMnC1---------------@
+//  ______________________________________________________________________________
+// | Bit  |  Bit7  |  Bit6  |  Bit5  |  Bit4  |  Bit3  |  Bit2  |  Bit1  |  Bit0  |
+//  ______________________________________________________________________________
+// | Name |  TnM1  |  TnM0  |  TnIO1 |  TnIO0 |  TnOC  |  TnPOL | TnDPX  | TnCCLR |
+// |______________________________________________________________________________
+// | POR  |   0    |   0    |   0    |   0    |   0    |   0    |   0    |   0    |
+// |_______________________________________________________________________________
+// BIT 7~6  TnM1~TnM0:選擇TMn工作模式位
+// 			00:  比較器匹配輸出模式   01:未定義模式
+//			10:  PWM模式              11:定時/計數器模式
+// BIT 5~4  TnIO1~TnIO0:選擇TPn_0，TPn_1輸出功能位
+//			比較匹配輸出模式
+// 			00:  無變化          01:  輸出低
+//			10:  輸出高          11:  輸出翻轉
+//			PWM模式
+// 			00:  強制無效狀態    01:  強制有效狀態
+//			10:  PWM輸出         11:  未定義
+//			計數器/定時模式: 未定義
+// BIT 3  TnOC
+// 			比較匹配輸出模式     PWM模式
+// 			0:  初始低           0:  低有效
+//			1:  初始高           1:  高有效
+// BIT 2  TnPOL:TPn_0,TPn_1輸出極性控制位
+// 			0:  同相
+//			1:  反相
+// Bit 1 TnDPX: TMn PWM period/duty Control
+//			0: CCRP - period; CCRA - duty
+//			1: CCRP - duty; CCRA - period
+// BIT 0  TnCCLR:選擇TMn計數器清零條件位
+// 			0:  TMn比較器P匹配
+//			1:  TMn比較器A匹配
+#define TM0C1_Default		0x00
 
 #define STM0A_MAX			1023      	
-
 #define STM0AL_Default		767%256	
-#define STM0AH_Default		767/256       	  // 
-#define STM0RP_Default		4       	  // =
+#define STM0AH_Default		767/256     // 
+#define STM0RP_Default		4       	// =
 
 
+//TM2 (CTM) only for HT66F318
+//                  @------------TM2C0 16bit CTM-----------@
+//  ______________________________________________________________________________
+// | Bit  |  Bit7  |  Bit6  |  Bit5  |  Bit4  |  Bit3  |  Bit2  |  Bit1  |  Bit0  |
+//  ______________________________________________________________________________
+// | Name |  TnPAU |  TnCK2 |  TnCK1 |  TnCK0 |  TnON  |   -    |   -    |   -    |
+// |______________________________________________________________________________
+// | POR  |   0    |   0    |   0    |   0    |   0    |   -    |   -    |   -    |
+// |_______________________________________________________________________________
+// Bit 7 TnPAU: TMn Counter Pause Control
+//			0: Run
+//			1: Pause
+// Bit 6~4 TnCK2~TnCK0: Select TMn Counter clock
+//			000: fSYS/4
+//			001: fSYS
+//			010: fH/16
+//			011: fH/64
+//			100: fTBC
+//			101: fH/8
+//			110: TCKn rising edge clock
+//			111: TCKn falling edge clock
+// Bit 3 TnON: TMn Counter On/Off Control
+//			0: Off
+//			1: On
+#define TM2C0_Default		0x00
+
+//                  @------------TM2C1 16bit CTM-----------@
+//  ______________________________________________________________________________
+// | Bit  |  Bit7  |  Bit6  |  Bit5  |  Bit4  |  Bit3  |  Bit2  |  Bit1  |  Bit0  |
+//  ______________________________________________________________________________
+// | Name |  TnM1  |  TnM0  |  TnIO1 |  TnIO0 |  TnOC  |  TnPOL |  TnDPX | TnCCLR |
+// |______________________________________________________________________________
+// | POR  |   0    |   0    |   0    |   0    |   0    |   0    |   0    |   0    |
+// |_______________________________________________________________________________
+// Bit 7~6 TnM1, TnM0: Select TMn Operating Mode
+//			00: Compare Match Output Mode
+//			01: Undefined
+//			10: PWM Mode
+//			11: Timer/Counter Mode
+// Bit 5~4 TnIO1, TnIO0: Select TPn output function
+//			Compare Match Output Mode
+//			00: No change
+//			01: Output low
+//			10: Output high
+//			11: Toggle output
+//			PWM Mode
+//			00: PWM Output inactive state
+//			01: PWM Output active state
+//			10: PWM output
+//			11: Undefined
+//			Timer/Counter Mode
+//			Unused
+// Bit 3 TnOC: TPn Output control bit
+//			Compare Match Output Mode
+//			0: Initial low
+//			1: Initial high
+//			PWM Mode
+//			0: Active low
+//			1: Active high
+// Bit 2 TnPOL: TPn Output polarity Control
+//			0: Non-invert
+//			1: Invert
+// Bit 1 TnDPX: TMn PWM period/duty Control
+//			0: CCRP - period; CCRA - duty
+//			1: CCRP - duty; CCRA - period
+// Bit 0 TnCCLR: Select TMn Counter clear condition
+//			0: TMn Comparatror P match
+//			1: TMn Comparatror A match
+#define TM2C1_Default		0x00
+
+#define TM2RP_Default		0x00
+#define	SETPTM2_10MS()		{ _tm2c0 = 0b01000000; _tm2c1 = 0xC1; _tm2al = 0x48; _tm2ah = 0x1;}
 #define TM2AL_bat_60		580%256	
 #define TM2AH_bat_60		580/256  
 #define TM2AL_bat_58		630%256	
@@ -276,8 +347,11 @@ void fun_PrepareToHalt();
 //					@-------Internal Power config--------@
 //Setting in Others file  when need
 
+
 //					@------------ADC config--------------@
-//                           @--------------TBC---------------@
+
+
+//                  @--------------TBC---------------@
 //  ______________________________________________________________________________
 // | Bit  |  Bit7  |  Bit6  |  Bit5  |  Bit4  |  Bit3  |  Bit2  |  Bit1  |  Bit0  |
 //  ______________________________________________________________________________
@@ -301,47 +375,7 @@ void fun_PrepareToHalt();
 // 			000:  2^8/ftb    001:  2^9/ftb    010:  2^10/ftb
 // 			011:  2^11/ftb   100:  2^12/ftb   101:  2^13/ftb
 // 			110:  2^14/ftb   111:  2^15/ftb
-
-#define TimeBase_Default 	0B10100000	//TimeBase1 0.5S   TimeBase 0  7.8ms
-
-
-
-//                           @--------------TB0C---------------@
-//  ______________________________________________________________________________
-// | Bit  |  Bit7  |  Bit6  |  Bit5  |  Bit4  |  Bit3  |  Bit2  |  Bit1  |  Bit0  |
-//  ______________________________________________________________________________
-// | Name |  TB0ON |  -     |  -     |  -     |  -     |  TB02  |  TB01  |  TB00  |
-// |______________________________________________________________________________
-// | POR  |   0    |   0    |   1    |   1    |   0    |   1    |   1    |   1    |
-// |_______________________________________________________________________________
-// BIT 7  TB0ON:
-// 			0:  Disable
-//			1:  Enable
-// BIT 2~0  TB02~TB00：TimeBase0溢出週期
-// 			000:  2^0/ftb    001:  2^1/ftb    010:  2^2/ftb
-// 			011:  2^3/ftb   100:  2^4/ftb   101:  2^5/ftb
-// 			110:  2^6/ftb   111:  2^7/ftb
-
-#define TimeBase0_Default 	0B00000111	//
-
-//                           @--------------TB1C---------------@
-//  ______________________________________________________________________________
-// | Bit  |  Bit7  |  Bit6  |  Bit5  |  Bit4  |  Bit3  |  Bit2  |  Bit1  |  Bit0  |
-//  ______________________________________________________________________________
-// | Name |  TB1ON |  -     |  -     |  -     |  -     |  TB12  |  TB11  |  TB10  |
-// |______________________________________________________________________________
-// | POR  |   0    |   0    |   1    |   1    |   0    |   1    |   1    |   1    |
-// |_______________________________________________________________________________
-// BIT 7  TB1ON:
-// 			0:  Disable
-//			1:  Enable
-// BIT 2~0  TB12~TB10：TimeBase0溢出週期
-// 			000:  2^8/ftb    001:  2^9/ftb    010:  2^10/ftb
-// 			011:  2^11/ftb   100:  2^12/ftb   101:  2^13/ftb
-// 			110:  2^14/ftb   111:  2^15/ftb
-
-#define TimeBase1_Default 	0B00000110	//500ms
-
+#define TimeBase_Default 	0B10110111	//TimeBase1 0.5S   TimeBase 0  7.8ms
 
 
 
@@ -356,7 +390,5 @@ void fun_PrepareToHalt();
 
 //					@-------------UART config-------------@
 //Setting in UART.h
-
-
 
 #endif

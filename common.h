@@ -4,11 +4,10 @@
 
 #define UART_VECTOR	0x2C	//F318 only
 
+
 #include "HT66F318.h"
 #include "typedef.h"
-//#include "MCUConfig.h"
 #include "EEPROM.h"
-//#include "Key_Scan.h"
 //#include "IAP.h"
 #include "Sys_Init.h"
 //#include "ADC.h"
