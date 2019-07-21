@@ -1,8 +1,8 @@
 //___________________________________________________________________
 //___________________________________________________________________
 // Description: 系統初始化相關程序
-//  Copyright : 2015 BY HOLTEK SEMICONDUCTOR INC
-//  File Name : sys_init.h
+//  Copyright : 2019 BY Louis Huang
+//  File Name : Sys_Init.h
 //Targer Board: 
 //   MCU      : HT66F317 HT66F318
 //   Author   : Louis Huang

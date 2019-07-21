@@ -1,11 +1,11 @@
 //___________________________________________________________________
 //___________________________________________________________________
-//  Copyright : 2015 BY HOLTEK SEMICONDUCTOR INC
+// Description: UART and RS-485
+//  Copyright : 2019 BY Louis Huang
 //  File Name : Uart.c
-// Description: UART or RS-485
 //Targer Board: None
 //   MCU      : HT66F318
-//   Author   : 
+//   Author   : Louis Huang
 //   Date     : 2019
 //   Version  : V00
 //   History  :
@@ -38,8 +38,7 @@ Function:	DEFINE
 #define		UCR1_8_E_2     				0x0E8     //8bits-Data  Even-Parity 2bits-Stop Format
 #define		UCR2Data       				0x0E4     //Enable TXEN RXEN BRGH RIE 
 #define		UCR2Data1       			0x0Ef     //Enable TXEN RXEN BRGH RIE 
-#define		BRGData        				38		  //12mhz      //Baud=19200,BRGH=1,N=38 
-
+#define		BRGData        				38		  //12Mhz  Baud=19200,BRGH=1,N=38 
 
 volatile	u8	gu8v_rx_guide;
 volatile	u8	gu8v_tx_guide;
@@ -61,16 +60,17 @@ void Uart_Init(void)
 	//_pgs02 = 0;//set tx rx pin			
 	
     _ucr1 = UCR1_8_N_1;     //enable UART function,8bits-Data  NONE-Parity 1bit-Stop Format
-    _ucr2 = UCR2Data1;       //enable TXEN,RXEN,Hige Speed Baud Rate, Receiver interrupt enable 
+    _ucr2 = UCR2Data1;      //enable TXEN,RXEN,Hige Speed Baud Rate, Receiver interrupt enable 
 	_rie = 1;
 	#ifndef	Debug
-   		_brg = BRGData;         //9600 Baud Rate	
+   		_brg = BRGData;		//9600 Baud Rate	
 	#else
-   		_brg = 38;         //9600 Baud Rate	
+   		_brg = 38;         	//9600 Baud Rate	
 	#endif
 
-	//_euti = 1;      			//UART interrupt enable
-	//_ure = 1;      			//UART interrupt enable	
+	_uarte = 1;				//UART interrupt enable
+	//_euti = 1;      			
+	//_ure = 1;      		//UART interrupt enable	
 	//_uartmd = 1;
 	//_usime = 1;
 }
@@ -95,17 +95,13 @@ void Uart_off(void)
 	//_pgs02 = 0;//set tx rx pin			
 }
 
-
-/********************************************************************
-Function:	UART_ISR
-INPUT	:
-OUTPUT	:	
-NOTE	:   
-********************************************************************/
-//@------------uart--------------@
-#pragma vector UART_ISR @ 0x2c
-void UART_ISR(void)
-//void __attribute((interrupt(UART_VECTOR)))  UART_ISR()	//for V3 of compiler
+//___________________________________________________________________
+//Function: UART ISR
+//NOTE	  :   
+//___________________________________________________________________
+//#pragma vector UART_ISR @ 0x2C					//for V2 of compiler
+//void UART_ISR(void)
+void __attribute((interrupt(0x2C)))  UART_ISR()		//for V3 of compiler
 {	
 	u8	lu8v_isr_temp0;
 		//clear urf flag
@@ -158,7 +154,6 @@ void UART_ISR(void)
 	   	}	
 }
 
-
 /********************************************************************
 Function:	Key_Scan
 INPUT	:
@@ -205,7 +200,7 @@ INPUT	:
 OUTPUT	:	
 NOTE	:   
 ********************************************************************/
-void	Uart_TX_BH32F52640_ADC_AUTO_TEST(u16	lu16v_tx_data)
+void Uart_TX_BH32F52640_ADC_AUTO_TEST(u16 lu16v_tx_data)
 {
 	array_uart_txbuff[0]	= 0x55;	
 	array_uart_txbuff[1]	= 00;			

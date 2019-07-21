@@ -1,11 +1,11 @@
 
 Linker Version 8.7.7.181224
 Input Object File: C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UARTTOI2C.OBJ
-Input Object File: C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\STARTUP1_L.OBJ
 Input Object File: C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UART.OBJ
 Input Object File: C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ
 Input Object File: C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\EEPROM.OBJ
 Input Object File: C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\INTERRUPT.OBJ
+Input Object File: C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\STARTUP1_L.OBJ
 
 Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB
 Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\v3_tabrd_mrsc.lib
@@ -15,6 +15,7 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      00h     0000h     0000h    0001h      CODE               @code (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UARTTOI2C.OBJ)
      00h     0001h     0001h    0001h      CODE               @start (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UARTTOI2C.OBJ)
      00h     0004h     0004h    0001h      CODE               @INT0_ISR_code (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\INTERRUPT.OBJ)
+     00h     0008h     0008h    0001h      CODE               @Comparator_ISR_code (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\INTERRUPT.OBJ)
      00h     000ch     000ch    0001h      CODE               @MuFunction0_ISR_code (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\INTERRUPT.OBJ)
      00h     0010h     0010h    0001h      CODE               @MuFunction1_ISR_code (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\INTERRUPT.OBJ)
      00h     0014h     0014h    0001h      CODE               @MuFunction2_ISR_code (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\INTERRUPT.OBJ)
@@ -22,27 +23,46 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      00h     001ch     001ch    0001h      CODE               @Timebase0_ISR_code (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\INTERRUPT.OBJ)
      00h     0020h     0020h    0001h      CODE               @Timebase1_ISR_code (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\INTERRUPT.OBJ)
      00h     0024h     0024h    0001h      CODE               @INT1_ISR_code (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\INTERRUPT.OBJ)
-     00h     0025h     002fh    000bh      CODE               _main (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UARTTOI2C.OBJ)
-     00h     0030h     0037h    0008h      CODE               _Uart_Init (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UART.OBJ)
-     00h     0038h     0045h    000eh      CODE               _fun_WDT_ResetInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
-     00h     0046h     0051h    000ch      CODE               _fun_PowerOnInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
-     00h     0052h     0068h    0017h      CODE               _fun_RamInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
+     00h     0028h     0028h    0001h      CODE               @I2C_ISR_code (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\INTERRUPT.OBJ)
+     00h     002ch     002fh    0004h      CODE               @UART_ISR_code (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UART.OBJ)
+     00h     0030h     003ah    000bh      CODE               _main (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UARTTOI2C.OBJ)
+     00h     003bh     0043h    0009h      CODE               _Uart_Init (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UART.OBJ)
+     00h     0044h     0099h    0056h      CODE               _UART_ISR (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UART.OBJ)
+     00h     009ah     00a7h    000eh      CODE               _fun_WDT_ResetInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
+     00h     00a8h     00b3h    000ch      CODE               _fun_PowerOnInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
+     00h     00b4h     00cah    0017h      CODE               _fun_RamInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
+     00h     00cbh     00cfh    0005h      CODE               _CROM2PROM (CROM2PROM)
      00h     00a0h     00afh    0010h      DATA     1.75      @HCCINIT0 (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UART.OBJ)
      00h     00b0h     00b3h    0004h      DATA     0         @HCCINIT0 (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\INTERRUPT.OBJ)
+     00h     00b4h     00b4h    0001h      DATA     2         @data_r12c (isr:ra~rh)
+     00h     00b5h     00b5h    0001h      DATA     2         @data_r22c (isr:ra~rh)
+     00h     00b6h     00b6h    0001h      DATA     2         @data_r32c (isr:ra~rh)
+     00h     00b7h     00b7h    0001h      DATA     2         @data_r42c (isr:ra~rh)
+     00h     00b8h     00b8h    0001h      DATA     2         @data_r52c (isr:ra~rh)
+     00h     00b9h     00b9h    0001h      DATA     2         @data_r62c (isr:ra~rh)
+     00h     00bah     00bah    0001h      DATA     2         @data_r72c (isr:ra~rh)
+     00h     00bbh     00bbh    0001h      DATA     4         @data_ra2c (isr:ra~rh)
 
      Local Sections
 
      Bank    Start     End      Length     Class    AvgIns    Name
-     00h     00b4h     00b4h    0000h      LOCAL    0         @dummy (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UARTTOI2C.OBJ)
-     00h     00b4h     00b4h    0000h      LOCAL    0         _main (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UARTTOI2C.OBJ)
-     00h     00b4h     00b4h    0000h      LOCAL    0         _fun_RamInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
-     00h     00b4h     00b4h    0000h      LOCAL    0         _fun_PowerOnInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
-     00h     00b4h     00b4h    0000h      LOCAL    0         _fun_WDT_ResetInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
-     00h     00b4h     00b4h    0000h      LOCAL    0         _Uart_Init (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UART.OBJ)
+     00h     00bch     00bch    0000h      LOCAL    0         @dummy (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UARTTOI2C.OBJ)
+     00h     00bch     00bch    0000h      LOCAL    0         _main (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UARTTOI2C.OBJ)
+     00h     00bch     00bch    0000h      LOCAL    0         _fun_RamInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
+     00h     00bch     00bch    0000h      LOCAL    0         _fun_PowerOnInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
+     00h     00bch     00bch    0000h      LOCAL    0         _fun_WDT_ResetInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
+     00h     00bch     00bch    0000h      LOCAL    0         _Uart_Init (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UART.OBJ)
+     00h     00bch     00bch    0000h      LOCAL    0         @dummy44 (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UART.OBJ)
+     00h     00bch     00bch    0000h      LOCAL    0         _UART_ISR (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UART.OBJ)
+     00h     00bch     00bch    0000h      LOCAL    0         _Crom2Prom (CROM2PROM)
 
      Public Symbols Information
      Address            Public by Name
      0018h              _ADC_ISR
+     0008h              _Comparator_ISR
+     00cch              _Crom2Prom
+     00cbh              _Crom2PromNext
+     0028h              _I2C_ISR
      0004h              _INT0_ISR
      0024h              _INT1_ISR
      000ch              _MuFunction0_ISR
@@ -50,12 +70,13 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      0014h              _MuFunction2_ISR
      001ch              _Timebase0_ISR
      0020h              _Timebase1_ISR
-     0030h              _Uart_Init
+     0044h              _UART_ISR
+     003bh              _Uart_Init
      00a0h              _array_uart_rxbuff
      00a6h              _array_uart_txbuff
-     0046h              _fun_PowerOnInit
-     0052h              _fun_RamInit
-     0038h              _fun_WDT_ResetInit
+     00a8h              _fun_PowerOnInit
+     00b4h              _fun_RamInit
+     009ah              _fun_WDT_ResetInit
      00b0h              _gu8v_100ms_count
      00b3h              _gu8v_400ms_count
      00b1h              _gu8v_4ms_count
@@ -63,10 +84,19 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      00afh              _gu8v_rx_guide
      00aeh              _gu8v_tx_guide
      00adh              _gu8v_uart_flag
-     0025h              _main
+     0030h              _main
+     00b4h              r12c
+     00b5h              r22c
+     00b6h              r32c
+     00b7h              r42c
+     00b8h              r52c
+     00b9h              r62c
+     00bah              r72c
+     00bbh              ra2c
 
      Address            Public by Value
      0004h              _INT0_ISR
+     0008h              _Comparator_ISR
      000ch              _MuFunction0_ISR
      0010h              _MuFunction1_ISR
      0014h              _MuFunction2_ISR
@@ -74,13 +104,14 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      001ch              _Timebase0_ISR
      0020h              _Timebase1_ISR
      0024h              _INT1_ISR
-     0025h              _main
-     0030h              _Uart_Init
-     0038h              _fun_WDT_ResetInit
-     0046h              _fun_PowerOnInit
-     0052h              _fun_RamInit
+     0028h              _I2C_ISR
+     0030h              _main
+     003bh              _Uart_Init
+     0044h              _UART_ISR
+     009ah              _fun_WDT_ResetInit
      00a0h              _array_uart_rxbuff
      00a6h              _array_uart_txbuff
+     00a8h              _fun_PowerOnInit
      00adh              _gu8v_uart_flag
      00aeh              _gu8v_tx_guide
      00afh              _gu8v_rx_guide
@@ -88,17 +119,28 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      00b1h              _gu8v_4ms_count
      00b2h              _gu8v_500ms_count
      00b3h              _gu8v_400ms_count
+     00b4h              _fun_RamInit
+     00b4h              r12c
+     00b5h              r22c
+     00b6h              r32c
+     00b7h              r42c
+     00b8h              r52c
+     00b9h              r62c
+     00bah              r72c
+     00bbh              ra2c
+     00cbh              _Crom2PromNext
+     00cch              _Crom2Prom
 
 
 ROM Usage Statistics
      Size      Used     Percentage
-     1000h     004eh    1%
+     1000h     00b0h    4%
 
 RAM Usage Statistics
     Bank      Size      Used     Percentage
-     00h       0060h     0014h    20%
+     00h       0060h     001ch    29%
      01h       0060h     0000h    0%
-     Total     00c0h     0014h    10%
+     Total     00c0h     001ch    14%
 
 Use Stack Count
 _main: 3
@@ -114,8 +156,9 @@ Call Tree
                     _Uart_Init (3)
             _fun_WDT_ResetInit (1)
                 _Uart_Init (2)
-    _UART_ISR
-        _Crom2Prom (0)
+    @dummy44
+        _UART_ISR (0)
+            _Crom2Prom (1)
     _fun_PrepareToHalt
         _Uart_off (0)
 

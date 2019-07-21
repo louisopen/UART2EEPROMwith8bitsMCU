@@ -13,28 +13,28 @@
 //___________________________________________________________________
 #include "HT66F318.h"
 #include "common.h"
-
+#include "Sys_Init.h"
+#include "interrupt.h"
+#include "eeprom.h"
+#include "uart.h"
 void main()
-{
+{	//like Arduino setup();
 	//u8	i;
 	//判斷是否是上電復位或者是正常情況下的非正常復位
 	//如果成立則執行上電初始化動作，反之則執行WDT溢出初始化
 	if(_to ==0 || _pdf ==0)									//WDT1	Reset
-	{	
-		//上電復位或者是正常情況下的非正常復位
+	{	//上電復位或者是正常情況下的非正常復位
 		fun_RamInit();	//RAM clear all.
 		fun_PowerOnInit();	//第一次上電或正常reset pin                             								
 	}
 	else													
-	{
-		//WDT復位
+	{	//WDT造成溢出復位
 		fun_WDT_ResetInit();
 	}
-  	//main loop here
+  	//main loop here like Arduino loop()
 	while(1)
 	{	
-		//清除看門狗
-		//GCC_CLRWDT();
+		//清除看門狗		//GCC_CLRWDT();
 		_clrwdt();
 		//用於計時
 		//fun_500ms_polling();

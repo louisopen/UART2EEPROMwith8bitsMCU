@@ -1,9 +1,9 @@
 //___________________________________________________________________
 //___________________________________________________________________
-//  Copyright : 2015 BY HOLTEK SEMICONDUCTOR INC
-//  File Name : fun_isr.c
-// Description: ┮Τい耞ㄧ计
-//   Customer : Holtek Demo Code
+// Description: Interupt ISR 
+//  Copyright : 2019 BY Louis Huang
+//  File Name : Interrupt.c掗
+//   Customer : 
 //Targer Board: None
 //     Note   :
 //___________________________________________________________________
@@ -14,73 +14,107 @@ volatile unsigned char  gu8v_500ms_count;
 volatile unsigned char  gu8v_4ms_count;	
 volatile unsigned char  gu8v_100ms_count;	
 
-/********************************************************************
-//@------------场い耞0ㄧ计--------------@
-NOTE	:   
-********************************************************************/
-//#pragma vector INT0_ISR @ 0x04
+//___________________________________________________________________
+//Function: INT0 ISR
+//NOTE	  :   
+//___________________________________________________________________
+//#pragma vector INT0_ISR @ 0x04					//for V2 of compiler
 //void INT0_ISR(void)
-void __attribute((interrupt(0x04)))  INT0_ISR()	//for V3 of compiler
+void __attribute((interrupt(0x04)))  INT0_ISR()		//for V3 of compiler
 {
 }
-//@------------场い耞0ㄧ计--------------@
-//#pragma vector INT1_ISR @ 0x24
+
+//___________________________________________________________________
+//Function: INT1 ISR
+//NOTE	  :   
+//___________________________________________________________________
+//#pragma vector INT1_ISR @ 0x24					//for V2 of compiler
 //void INT1_ISR(void)
-void __attribute((interrupt(0x24)))  INT1_ISR()	//for V3 of compiler
+void __attribute((interrupt(0x24)))  INT1_ISR()		//for V3 of compiler
 {
 }
-//@-------MuFunction0 い耞ㄧ计------------@
-// STM0 & PTM0 ノ(TM0)
-//#pragma vector MuFunction0_ISR @ 0x0c
+
+//___________________________________________________________________
+//Function: MuFunction0 ISR
+//NOTE	  : STM0 & PTM0 撴?(TM0)  
+//___________________________________________________________________
+//#pragma vector MuFunction0_ISR @ 0x0c				//for V2 of compiler
 //void MuFunction0_ISR(void)
 void __attribute((interrupt(0x0c)))  MuFunction0_ISR()	//for V3 of compiler
 {		
 	//_ptm0af = 0;
 }
-//@-------MuFunction1 い耞ㄧ计------------@
-// Multi function1 PTM1 & PTM2
-//#pragma vector MuFunction1_ISR @ 0x10
+
+//___________________________________________________________________
+//Function: MuFunction1 ISR
+//NOTE	  : PTM1 & PTM2  
+//___________________________________________________________________
+//#pragma vector MuFunction1_ISR @ 0x10				//for V2 of compiler
 //void MuFunction1_ISR(void)
 void __attribute((interrupt(0x10)))  MuFunction1_ISR()	//for V3 of compiler
 {		
 	//_ptm0af = 0;
 }
-//@-------MuFunction2 い耞ㄧ计-----------@
-// Multi function2 LVD & EEPROM W
-//#pragma vector MuFunction2_ISR @ 0x14
+
+//___________________________________________________________________
+//Function: MuFunction2 ISR
+//NOTE	  : LVD & EEPROM W
+//___________________________________________________________________
+//#pragma vector MuFunction2_ISR @ 0x14				//for V2 of compiler
 //void MuFunction2_ISR(void)
 void __attribute((interrupt(0x14)))  MuFunction2_ISR()	//for V3 of compiler
 {		
 	//_ptm0af = 0;
 }
-//@------------ADC い耞ㄧ计---------------@
-//#pragma vector ADC_ISR @ 0x18
+
+//___________________________________________________________________
+//Function: ADC ISR
+//NOTE	  : 
+//___________________________________________________________________
+//#pragma vector ADC_ISR @ 0x18						//for V2 of compiler
 //void ADC_ISR(void)
-void __attribute((interrupt(0x18)))  ADC_ISR()	//for V3 of compiler
+void __attribute((interrupt(0x18)))  ADC_ISR()		//for V3 of compiler
 {
 }
-//@----------Timebase0 い耞ㄧ计-----------@
-//#pragma vector Timebase0_ISR @ 0x1c
+
+//___________________________________________________________________
+//Function: TimeBase0 ISR
+//NOTE	  : 
+//___________________________________________________________________
+//#pragma vector Timebase0_ISR @ 0x1c				//for V2 of compiler
 //void Timebase0_ISR(void)
 void __attribute((interrupt(0x1c)))  Timebase0_ISR()	//for V3 of compiler
 { 
 }
-//@----------Timebase1 い耞ㄧ计-----------@
-//#pragma vector Timebase1_ISR @ 0x20
+
+//___________________________________________________________________
+//Function: TimeBase1 ISR
+//NOTE	  : 
+//___________________________________________________________________
+//#pragma vector Timebase1_ISR @ 0x20				//for V2 of compiler
 //void Timebase1_ISR(void)
 void __attribute((interrupt(0x20)))  Timebase1_ISR()	//for V3 of compiler
 {	
 }
-//@-----------UART0 い耞ㄧ计--------------@
-//DEFINE_ISR(UART0_ISR, UART0_VECTOR)
-//{
-//
-//}
-//@-------------SPI い耞ㄧ计--------------@
-//DEFINE_ISR(SPI_ISR, SPI_VECTOR)
-//{
-//}
-//@------------SIM い耞ㄧ计---------------@
-//DEFINE_ISR(SIM_ISR, SIM_VECTOR)
-//{
-//}
+
+//___________________________________________________________________
+//Function: Comparator ISR
+//NOTE    : Only for HT66F318
+//___________________________________________________________________
+DEFINE_ISR(Comparator_ISR, 0x08)					//for V3 of compiler
+//#pragma vector Comparator_ISR @ 0x08				//for V2 of compiler
+//void Comparator_ISR(void)
+//void __attribute((interrupt(0x08)))  Comparator_ISR()	//for V3 of compiler
+{
+}
+
+//___________________________________________________________________
+//Function: I2C ISR
+//NOTE    : Only for HT66F318
+//___________________________________________________________________
+DEFINE_ISR(I2C_ISR, 0x28)							//for V3 of compiler
+//#pragma vector I2C_ISR @ 0x28
+//void I2C_ISR(void)
+//void __attribute((interrupt(0x28)))  I2C_ISR()	//for V3 of compiler
+{
+}
