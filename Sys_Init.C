@@ -1,24 +1,24 @@
 //___________________________________________________________________
 //___________________________________________________________________
 // Description: 系統初始化相關程序
-//  Copyright : 2019 BY Louis Huang
-//  File Name : Sys_Init.c
+//  Copyright@: 2019 BY Louis Huang / https://github.com/louisopen/
+//   File Name: Sys_Init.c
 //Targer Board: MK8002D
-//   MCU      : HT66F317 HT66F318
-//   Author   : Louis Huang
-//   Date     : 2019/07/20
-//   Version  : V00
-//   History  :
+//    MCU Body: HT66F317 HT66F318-28ssop
+//      Author: Louis Huang
+//        Date: 2019/05/18
+//     Version: V00 on Hardware V10
+//     History:
 //___________________________________________________________________
 //___________________________________________________________________
 #include "common.h"
 
-/********************************************************************
-Function: MCU WDT復位初始化
-INPUT	:
-OUTPUT	:
-NOTE	:
-********************************************************************/
+//___________________________________________________________________
+//Function: MCU WDT復位初始化
+//   INPUT: 
+//  OUTPUT: 
+//	  NOTE: 
+//___________________________________________________________________
 void fun_WDT_ResetInit()	//WDT 溢出復位
 {
 	//IO
@@ -26,41 +26,38 @@ void fun_WDT_ResetInit()	//WDT 溢出復位
  	Uart_Init();	
 	//fun_En_Analog_power();
 	//fun_Enable_ADC();
-	
- 	//ptm2 only for HT66F318
- 	//SETPTM2_10MS();
- 	//_t2on  = 1;	
- 	
- 	//TimeBase 0/1
- 	_tbc = TimeBase_Default;
-	_tb0e = 1;	//enable TB0 interrupt
-	//_tb1e = 1;	//enable TB1 interrupt
+		
+ 	//TimeBase
+	TimeBaseInitial();
 
-	//Timer Control	
+	//Timer0 Control off	
 	_tm0c0 = TM0C0_Default;
 	_tm0c1 = TM0C1_Default;
-	_tm0al = PTM0AL_Default;	//;占空比
-	_tm0ah = PTM0AH_Default;
-	_tm0rp = PTM0RP_Default;	//4*256 周期  應該有10bits	????	
-	
+	_tm0al = TM0AL_Default;	
+	_tm0ah = TM0AH_Default;
+	_tm0rp = TM0RP_Default;		//有8bit ht66f318, 16bit ht66f317
+	//Timer1 Control off
+	_tm1c0 = TM1C0_Default;
+	_tm1c1 = TM1C1_Default;
+	_tm1al = TM1AL_Default;	
+	_tm1ah = TM1AH_Default;
+	_tm1rpl = TM1RPL_Default;	//有10bit f317/f318
+	_tm1rph = TM1RPH_Default;	//有10bit f317/f318
+	//Timer2 Control off
+	//_tm2rp = TM2RP_Default;	//有8bit only for ht66f318		
   	_nop();
   	//_pgc0 = 0;
 	//_pg0 = 0;
 	//_pbs1 = 0b11111111;
-	//SYSTEM_INITIALIZATION(); //System initialization
-	//DAC_RAMP_UP(); //Open DAC and do ramp up	
-	//fun_en_battery_check();
-	//gbv_bat_low = 0;
-	//gu8v_battery_votage = 0;
-	_emi  = 1;	//開啟中斷
-	
+	_emi  = 1;	//開啟中斷	
 }
-/********************************************************************
-Function: MCU上電初始化
-INPUT	:
-OUTPUT	:
-NOTE	:
-********************************************************************/
+
+//___________________________________________________________________
+//Function: MCU POWER UP 上電初始化
+//   INPUT: 
+//  OUTPUT: 
+//	  NOTE: 
+//___________________________________________________________________
 void fun_PowerOnInit() //第一次上電或正常reset pin
 {
   	SETHXT();	//fH source is external Hi speed
@@ -75,15 +72,15 @@ void fun_PowerOnInit() //第一次上電或正常reset pin
 	
 	//GPIO control
 	fun_WDT_ResetInit();
-//	fun_CAL_REEPROM();
-//	fun_init_time();	
+//	fun_CAL_REEPROM();	
 }
-/********************************************************************
-Function: 關閉各個模塊進入HLAT模式
-INPUT	:
-OUTPUT	:
-NOTE	:
-********************************************************************/
+
+//___________________________________________________________________
+//Function: 關閉各個模塊進入HLAT模式
+//   INPUT: 
+//  OUTPUT: 
+//	  NOTE: 
+//___________________________________________________________________
 void fun_PrepareToHalt()
 {
 /*	
@@ -100,37 +97,16 @@ void fun_PrepareToHalt()
 	_pg4 = 0;
 */	
 	//fun_dis_battery_check();	
-	 //fun_Disable_ADC();	
-	 //fun_Dis_Analog_power();
+	//fun_Disable_ADC();	
+	//fun_Dis_Analog_power();
 
-	 //fun_LCD_Disable();
-	//LCD_ICON(LBC_CLR,LCD_mmhg_ADDR);
-	//LCD_DISP_DIA_ON(LBC_CLR,gu16v_dia);
-	//LCD_DISP_SYS_ON(LBC_CLR,gu16v_sys);	
-	//LCD_DISP_Pluse_ON(LBC_CLR,gu8v_heart);	
-	//LCD_ICON(LBC_CLR,LCD_Heart_beep_ADDR);	
-	 Uart_off();
-	 _t1on  = 0;
-//	 gbv_tb1_flag = 0;
+	Uart_off();
+	_t1on  = 0;
 //	 _regc = 0x00;
 //	 _fsiden = 1;
-	 _halt();
+	_halt();
 	//fun_500ms_polling();	
-	/* 
-	 if(gbv_tb1_flag)
-	 {
-	 	
-	 }
-	 else
-	 {
-	 	fun_ResetInit();
-		//fun_LCD_INIT();
-		//fun_LCD_Enable();		
-	 	//gu8v_halt_time = LU8C_HALT_TIME - 8;
-	 }
-	 */
 }
-
 
 //HALT
 //SLEEPMode0	@(IDLEN==0  & LVDEN==Disable & WDT Disable )
@@ -148,51 +124,45 @@ void fun_PrepareToHalt()
 //Stop:CPU
 //Run :Fs,Fsub
 
-
-/********************************************************************
-Function: GPIO初始化
-INPUT	: none
-OUTPUT	: none
-NOTE	: 所有IO config為輸出low
-********************************************************************/
+//___________________________________________________________________
+//Function: GPIO initial
+//   INPUT: 
+//  OUTPUT: 
+//	  NOTE: IO only, special function define by the call
+//___________________________________________________________________
 void GPIO_Init()
 {/*
 	_pac = 0b11100111;
 	_papu = 0b11100111;	
+	_pawu = 0b00000000; 	//default is 0.
 	_pa = 0;
+	
 	_pbc = 0b11111111;
 	_pbpu =   0b11111111;		
 	_pb =0;
+	
 	_pcc = 0xff;
 	_pcpu = 0b11111111;		
 	_pc = 0;
+	
+	//only for ht66f318
 	_pdc = 0;
 	_pdpu = 0;		
-	_pd = 0;
-	_pec = 0;
-	_pepu = 0;	
-	_pe = 0;
-	_pfc = 0;	
-	_pfpu = 0;	
-	_pf = 0;	
-	_pgc = 0b00010110;	
-	_pgpu = 0b00010110;	
-	_pg = 0b00010110;		
+	_pd = 0;	
 */	
 	//fun_Key_init();
 	//GPIO_VALUE_IO = 0;
 	//GPIO_VALUE = 0;
 	//GPIO_PUMP_IO = 0;
-	//GPIO_PUMP = 0;	
-	
+	//GPIO_PUMP = 0;		
 }
-/********************************************************************
-Function:fun_Ram_Init
-INPUT	:
-OUTPUT	:
-NOTE_1	:HT66F317 Bank0(80h~FFh)
-NOTE_2	:HT66F318 Bank0(A0h~FFh), bank1(A0h~FFh)
-********************************************************************/
+
+//___________________________________________________________________
+//Function: fun_Ram_Init
+//   INPUT: 
+//  OUTPUT: 
+//	  NOTE:   
+//___________________________________________________________________
 void fun_RamInit()
 {
 	_bp = 0;

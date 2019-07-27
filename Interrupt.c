@@ -1,11 +1,14 @@
 //___________________________________________________________________
 //___________________________________________________________________
 // Description: Interupt ISR 
-//  Copyright : 2019 BY Louis Huang
-//  File Name : Interrupt.c’é
-//   Customer : 
-//Targer Board: None
-//     Note   :
+//  Copyright@: 2019 BY Louis Huang / https://github.com/louisopen/
+//   File Name: Interrupt.c’é
+//Targer Board: MK8002D
+//    MCU Body: HT66F317 HT66F318-28ssop
+//      Author: Louis Huang
+//        Date: 2019/05/18
+//     Version: V00 on Hardware V10
+//     History:
 //___________________________________________________________________
 //___________________________________________________________________
 #include "common.h"
@@ -98,8 +101,8 @@ void __attribute((interrupt(0x20)))  Timebase1_ISR()	//for V3 of compiler
 }
 
 //___________________________________________________________________
-//Function: Comparator ISR
-//NOTE    : Only for HT66F318
+//Function: Comparator ISR (Only for HT66F318)
+//NOTE    : 
 //___________________________________________________________________
 DEFINE_ISR(Comparator_ISR, 0x08)					//for V3 of compiler
 //#pragma vector Comparator_ISR @ 0x08				//for V2 of compiler
@@ -109,8 +112,8 @@ DEFINE_ISR(Comparator_ISR, 0x08)					//for V3 of compiler
 }
 
 //___________________________________________________________________
-//Function: I2C ISR
-//NOTE    : Only for HT66F318
+//Function: I2C ISR (Only for HT66F318)
+//NOTE    : 
 //___________________________________________________________________
 DEFINE_ISR(I2C_ISR, 0x28)							//for V3 of compiler
 //#pragma vector I2C_ISR @ 0x28

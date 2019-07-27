@@ -1,21 +1,18 @@
 //___________________________________________________________________
 //___________________________________________________________________
 // Description: UART and RS-485
-//  Copyright : 2019 BY Louis Huang
+//  Copyright@: 2019 BY Louis Huang / https://github.com/louisopen/
 //  File Name : Uart.c
-//Targer Board: None
-//   MCU      : HT66F318
-//   Author   : Louis Huang
-//   Date     : 2019
-//   Version  : V00
-//   History  :
+//Targer Board: MK8002D
+//    MCU Body: HT66F317 HT66F318-28ssop
+//      Author: Louis Huang
+//        Date: 2019/05/18
+//     Version: V00 on Hardware V10
+//     History:
 //___________________________________________________________________
 //___________________________________________________________________
 #include "common.h"
 
-/********************************************************************
-Function:	DEFINE
-********************************************************************/
 #define		cmd_return_op1adnum			30
 #define		cmd_return_op2adnum			31
 #define		cmd_adjust_bandgap_up		32
@@ -42,22 +39,29 @@ Function:	DEFINE
 
 volatile	u8	gu8v_rx_guide;
 volatile	u8	gu8v_tx_guide;
-volatile	__byte_type	gu8v_uart_flag;
+volatile	__byte_type	gu8v_uart_flag;	//bit operation
 volatile	u8	array_uart_txbuff[7];
 volatile	u8	array_uart_rxbuff[6];
 
-/********************************************************************
-Function:	Key_Scan
-INPUT	:
-OUTPUT	:	
-NOTE	:   
-********************************************************************/
+//___________________________________________________________________
+//Function: UART initial
+//   INPUT: 
+//  OUTPUT: 
+//	  NOTE: GPIO initial  
+//___________________________________________________________________
 void Uart_Init(void)
 {
 	//_pgs05 = 1;//set tx rx pin
 	//_pgs04 = 0;//set tx rx pin
 	//_pgs03 = 1;//set tx rx pin
-	//_pgs02 = 0;//set tx rx pin			
+	//_pgs02 = 0;//set tx rx pin
+	_pcc2 = 0;	//set tx_enable(RS-485) pin output	
+	_pc2 = 0;	//set tx_enable(RS-485) receiver mode
+	
+	_pcc3 = 0;	//set tx pin output		
+	_pcc4 = 1;	//set rx pin intput	(default is input)
+	_pc3 = 1;	//set level high TXD (default)
+	_pc4 = 1;	//set level high RXD (default)
 	
     _ucr1 = UCR1_8_N_1;     //enable UART function,8bits-Data  NONE-Parity 1bit-Stop Format
     _ucr2 = UCR2Data1;      //enable TXEN,RXEN,Hige Speed Baud Rate, Receiver interrupt enable 
@@ -73,14 +77,15 @@ void Uart_Init(void)
 	//_ure = 1;      		//UART interrupt enable	
 	//_uartmd = 1;
 	//_usime = 1;
+	//_emi  = 1;	//中斷總開關開啟
 }
 
-/********************************************************************
-Function:	Key_Scan
-INPUT	:
-OUTPUT	:	
-NOTE	:   
-********************************************************************/
+//___________________________________________________________________
+//Function: UART DISABLE
+//   INPUT: 
+//  OUTPUT: 
+//	  NOTE: Disable all function & GPIO  
+//___________________________________________________________________
 void Uart_off(void)
 {
 	_rie = 0;
@@ -89,6 +94,12 @@ void Uart_off(void)
 	//_ucr2 = 0;	
 	//_sime = 0;
 	
+	_pcc2 = 1;	//set tx_enable(RS-485) pin input (default)	
+	_pc2 = 1;	//set tx_enable(RS-485) hi level
+	
+	_pcc3 = 1;	//set tx pin input (default)		
+	_pcc4 = 1;	//set rx pin input (default)
+
 	//_pgs05 = 0;//set tx rx pin
 	//_pgs04 = 0;//set tx rx pin
 	//_pgs03 = 0;//set tx rx pin
@@ -96,8 +107,8 @@ void Uart_off(void)
 }
 
 //___________________________________________________________________
-//Function: UART ISR
-//NOTE	  :   
+//Function: UART ISR (Only for HT66F318)
+//NOTE	  : Data send and receive
 //___________________________________________________________________
 //#pragma vector UART_ISR @ 0x2C					//for V2 of compiler
 //void UART_ISR(void)
@@ -114,12 +125,13 @@ void __attribute((interrupt(0x2C)))  UART_ISR()		//for V3 of compiler
 	   	{
 	   	   if(_rxif)							//RXR	data register has available	data
 	   	   {
-	   	   		//receive data from PC
+	   	   		_pc2 = 0;	//set tx_enable(RS-485) RX mode
+	   	   		//receive data from other site.
 				array_uart_rxbuff[gu8v_rx_guide] = _txr_rxr; 
 				//
 				if(array_uart_rxbuff[gu8v_rx_guide] == 10)	
 				{
-					gbv_rx_success = 1;
+					gbv_rx_success = 1;		//Received finished
 				}
 					
 
@@ -131,38 +143,39 @@ void __attribute((interrupt(0x2C)))  UART_ISR()		//for V3 of compiler
 				{
 					gu8v_rx_guide ++ ;						
 				}
-	   	   	  
-	   	   	  
-	   	   	  //GCC_NOP();
-	   	   	  _nop();
+	   	   	  	//GCC_NOP();
+	   	   	  	_nop();
 	   	   }
-	   	   if(_txif)							//TXR	data register is empty
+	   	   if(_txif)					//TXR data register is empty
 	   	   {
 	   	   		gu8v_tx_guide++; 	   		
-	   	   		if(gu8v_tx_guide<7)			//
+	   	   		if(gu8v_tx_guide<7)		//Numberic is send buffer size
 	   	   		{
+	   	   			_pc2 = 1;	//set tx_enable(RS-485) TXmode
+	   	   			
 		   	   		_txr_rxr= array_uart_txbuff[gu8v_tx_guide];	  	   	   			
 //	   	   			gu16v_an4_votage%256;		//send 0xaa to PC
 	   	   		}
 	   	   		else 
 	   	   		{
-//	   	   			gu8v_tx_guide=0;
-					
+	   	   			gu8v_tx_guide=0;
+	   	   				
+	   	   			_pc2 = 0;	//set tx_enable(RS-485) RX mode				
 	   	   		}
 					
 	   	   }
 	   	}	
 }
 
-/********************************************************************
-Function:	Key_Scan
-INPUT	:
-OUTPUT	:	
-NOTE	:   
-********************************************************************/
-void	Uart_manage(void)
+//___________________________________________________________________
+//Function: UART main process
+//   INPUT: 
+//  OUTPUT: 
+//	  NOTE:   
+//___________________________________________________________________
+void Uart_manage(void)
 {
-	if(gbv_rx_success == 1)
+	if(gbv_rx_success == 1)	//Is't finished ?
 	{
 		gbv_rx_success = 0;
 		if(array_uart_rxbuff[0] == 47 && array_uart_rxbuff[5] == 10)
@@ -188,28 +201,29 @@ void	Uart_manage(void)
 		{
 			gu8v_rx_guide = 0;
 			
-		}
-		
+		}	
 	}
-	
 }
 
-/********************************************************************
-Function:	
-INPUT	:
-OUTPUT	:	
-NOTE	:   
-********************************************************************/
-void Uart_TX_BH32F52640_ADC_AUTO_TEST(u16 lu16v_tx_data)
+//___________________________________________________________________
+//Function: UART send with the buffer
+//   INPUT: 16 bit data 
+//  OUTPUT: 
+//	  NOTE:   
+//___________________________________________________________________
+void Uart_TX_Send_Test(u16 lu16v_tx_data)
 {
+	gu8v_tx_guide=1;		
 	array_uart_txbuff[0]	= 0x55;	
 	array_uart_txbuff[1]	= 00;			
 	array_uart_txbuff[2]	= lu16v_tx_data%256;	
 	array_uart_txbuff[3]	= lu16v_tx_data/256;	
 	array_uart_txbuff[4]	= 00;		
 	array_uart_txbuff[5]	= array_uart_txbuff[0]+array_uart_txbuff[1]+array_uart_txbuff[2]+array_uart_txbuff[3]+array_uart_txbuff[4];	
-	_txr_rxr= array_uart_txbuff[0];					
-	gu8v_tx_guide=0;	
 	
+	_pc2 = 1;	//set tx_enable(RS-485) TX mode
+	_txr_rxr= array_uart_txbuff[0];		//TXR data register is empty				
+	
+	gu8v_tx_guide=0;		
 }
 

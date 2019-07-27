@@ -6,6 +6,7 @@ Input Object File: C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OB
 Input Object File: C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\EEPROM.OBJ
 Input Object File: C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\INTERRUPT.OBJ
 Input Object File: C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\STARTUP1_L.OBJ
+Input Object File: C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\ADC.OBJ
 
 Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB
 Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\v3_tabrd_mrsc.lib
@@ -26,13 +27,13 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      00h     0028h     0028h    0001h      CODE               @I2C_ISR_code (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\INTERRUPT.OBJ)
      00h     002ch     002fh    0004h      CODE               @UART_ISR_code (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UART.OBJ)
      00h     0030h     003ah    000bh      CODE               _main (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UARTTOI2C.OBJ)
-     00h     003bh     0043h    0009h      CODE               _Uart_Init (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UART.OBJ)
-     00h     0044h     0099h    0056h      CODE               _UART_ISR (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UART.OBJ)
-     00h     009ah     00a7h    000eh      CODE               _fun_WDT_ResetInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
-     00h     00a8h     00b3h    000ch      CODE               _fun_PowerOnInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
-     00h     00b4h     00cah    0017h      CODE               _fun_RamInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
-     00h     00cbh     00cfh    0005h      CODE               _CROM2PROM (CROM2PROM)
-     00h     00a0h     00afh    0010h      DATA     1.75      @HCCINIT0 (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UART.OBJ)
+     00h     003bh     0049h    000fh      CODE               _Uart_Init (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UART.OBJ)
+     00h     004ah     00a4h    005bh      CODE               _UART_ISR (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UART.OBJ)
+     00h     00a5h     00bch    0018h      CODE               _fun_WDT_ResetInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
+     00h     00bdh     00c8h    000ch      CODE               _fun_PowerOnInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
+     00h     00c9h     00dfh    0017h      CODE               _fun_RamInit (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\SYS_INIT.OBJ)
+     00h     00e0h     00e4h    0005h      CODE               _CROM2PROM (CROM2PROM)
+     00h     00a0h     00afh    0010h      DATA     1.875     @HCCINIT0 (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UART.OBJ)
      00h     00b0h     00b3h    0004h      DATA     0         @HCCINIT0 (C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\INTERRUPT.OBJ)
      00h     00b4h     00b4h    0001h      DATA     2         @data_r12c (isr:ra~rh)
      00h     00b5h     00b5h    0001h      DATA     2         @data_r22c (isr:ra~rh)
@@ -60,8 +61,8 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      Address            Public by Name
      0018h              _ADC_ISR
      0008h              _Comparator_ISR
-     00cch              _Crom2Prom
-     00cbh              _Crom2PromNext
+     00e1h              _Crom2Prom
+     00e0h              _Crom2PromNext
      0028h              _I2C_ISR
      0004h              _INT0_ISR
      0024h              _INT1_ISR
@@ -70,13 +71,13 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      0014h              _MuFunction2_ISR
      001ch              _Timebase0_ISR
      0020h              _Timebase1_ISR
-     0044h              _UART_ISR
+     004ah              _UART_ISR
      003bh              _Uart_Init
      00a0h              _array_uart_rxbuff
      00a6h              _array_uart_txbuff
-     00a8h              _fun_PowerOnInit
-     00b4h              _fun_RamInit
-     009ah              _fun_WDT_ResetInit
+     00bdh              _fun_PowerOnInit
+     00c9h              _fun_RamInit
+     00a5h              _fun_WDT_ResetInit
      00b0h              _gu8v_100ms_count
      00b3h              _gu8v_400ms_count
      00b1h              _gu8v_4ms_count
@@ -107,11 +108,10 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      0028h              _I2C_ISR
      0030h              _main
      003bh              _Uart_Init
-     0044h              _UART_ISR
-     009ah              _fun_WDT_ResetInit
+     004ah              _UART_ISR
      00a0h              _array_uart_rxbuff
+     00a5h              _fun_WDT_ResetInit
      00a6h              _array_uart_txbuff
-     00a8h              _fun_PowerOnInit
      00adh              _gu8v_uart_flag
      00aeh              _gu8v_tx_guide
      00afh              _gu8v_rx_guide
@@ -119,7 +119,6 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      00b1h              _gu8v_4ms_count
      00b2h              _gu8v_500ms_count
      00b3h              _gu8v_400ms_count
-     00b4h              _fun_RamInit
      00b4h              r12c
      00b5h              r22c
      00b6h              r32c
@@ -128,13 +127,15 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      00b9h              r62c
      00bah              r72c
      00bbh              ra2c
-     00cbh              _Crom2PromNext
-     00cch              _Crom2Prom
+     00bdh              _fun_PowerOnInit
+     00c9h              _fun_RamInit
+     00e0h              _Crom2PromNext
+     00e1h              _Crom2Prom
 
 
 ROM Usage Statistics
      Size      Used     Percentage
-     1000h     00b0h    4%
+     1000h     00c5h    4%
 
 RAM Usage Statistics
     Bank      Size      Used     Percentage
@@ -146,6 +147,8 @@ Use Stack Count
 _main: 3
 _UART_ISR: 1
 _fun_PrepareToHalt: 1
+_TEST_EEPROM: 1
+_TEST_ADC: 2
 
 Call Tree
     @dummy
@@ -161,6 +164,12 @@ Call Tree
             _Crom2Prom (1)
     _fun_PrepareToHalt
         _Uart_off (0)
+    _TEST_EEPROM
+        _fun_Write_EEPROM (0)
+        _fun_Read_EEPROM (0)
+    _TEST_ADC
+        _fun_Get_ADC (0)
+            __DELAYX (1)
 
 HLINK: Program entry point at section '@code' (address 0) of file 'C:\ChipsGarden\醇法\MK8002D\UARTtoI2Cwith8bitsMCU\UARTTOI2C.OBJ'
 
