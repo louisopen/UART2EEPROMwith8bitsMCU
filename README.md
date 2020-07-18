@@ -1,25 +1,33 @@
-### UARTtoI2Cwith8bitsMCU
-* HT-IDE3000 V7.99  HT66V317/HT66V318 28ssop
-* Used HT66V318 control LED matrix, EEPROM, ADC, I2C ... via UART(can use RS-485)
+### UARTtoEEPROMwith8bitsMCU
+* HT-IDE3000 V7.99  HT66F317/HT66F318 28ssop
+* Used HT66F318 control GPIO, LED matrix, EEPROM, ADC, I2C... via UART(Same with RS-485)
 * 專業便宜又好用, 不過案例竟然這樣的少, 太可憐! 看不下去! 
+* 首開範列是一個簡單利用PC軟件下達指令存取MCU內部的EEPROM(64byte), 但MCU內存緩衝故意弄小, 協議比照RS-485通訊協議格式.
 
 * HT-IDE3000 V7.99
 ![Image](HT-IDE3000_version.jpg)
 * HOLTEK C Compiler V3/Assembly
-![Image](HT-IDE3000_projectoption.jpg)
+![Image](ProjectCompiler.jpg)
+* HT66F318 Config
+![Image](ProjectOption1.jpg)
+![Image](ProjectOption2.jpg)
+![Image](ProjectOption3.jpg)
+![Image](ProjectOption4.jpg)
 
 
 #### Internal function HOLTEK 8bit MCU HT66F318:
-* 利用Holtek MCU HT66F318 28sop 作為UART與EEPROM(內置)或其他GPIO...轉換工具
-* Converter between UART w EEPROM (internal). 
-* Converter between UART w LED matrix.
-* Converter between UART w ADC (10bit).
+* 利用Holtek MCU HT66F318 28sop UART做為與EEPROM(內置)或其他GPIO的溝通途徑...開工必備工具
+* PC通訊軟件做為主動工具, 協議(9600,n,8,1), 格式比照RS-485格式 
+* For Example: 
+* UART Formate(Get from MCU): 44 03 00 00 00 04 A0 0A   #讀取EEPROM位址0x0000,4組(共計8個bytes)
+
+* UART Formate(Get from MCU): 44 03 01 00 00 01 A0 0A   #讀取ADC通道0,1組(共計2個bytes)
+
+* UART Formate(Write to MCU): 44 06 00 0A EE FF A0 0A   #寫入EEPROM位址0x000A,資料為0xEEFF
 
 
 #### Other:
-* UART to control I2C with EEPROM external(24C02...)
-* UART to control I2C with ADC external(HY3118 24bit ADC)
-* For Example: (9600,n,8,1) 
-* UART Formate(get from MCU): GET addr
-* UART Formate(Write to MCU)1.: PUT addr data 
-* UART Formate(Write to MCU)2.: PUT addr data data
+* UART access to ADC internal 10 bits resolution.
+* UART access to ADC converter(HY3118 24bit ADC) via I2C bus.
+* UART access to OLED 16x2 driver via SPI bus.
+
