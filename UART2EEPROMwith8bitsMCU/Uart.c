@@ -180,14 +180,8 @@ void Uart_RXD_Manage(void)
 
 					break;
 				case 0x03:	//if request: 44 03 00 01 00 04 A0 0A 	ModBus Read
-					if(array_uart_rxbuff[2]==0x01)	//ADC convert request
-					{
-						reg_crc = Get_ADC(array_uart_rxbuff[3]);	//Analog AN0~An7
-						array_uart_txbuff[3] = reg_crc/256;
-						array_uart_txbuff[4] = reg_crc%256;
-						Buffer_Send3(2);
-					}
-					else
+					if(array_uart_rxbuff[2]==0x00)	//EEPROM request
+					//if(array_uart_rxbuff[2]==0x01)	//ADC convert request
 					{
 						//for(i=0;i<EEPROM_BUFFER_MAX;i++)
 						for(i=0;i<(array_uart_rxbuff[5]*2);i++)

@@ -21,8 +21,6 @@
 * For Example: 
 * UART Formate(Get from MCU): 44 03 00 00 00 04 A0 0A   #讀取EEPROM位址0x0000,4組(共計8個bytes)
 
-* UART Formate(Get from MCU): 44 03 01 00 00 01 A0 0A   #讀取ADC通道0,1組(共計2個bytes)
-
 * UART Formate(Write to MCU): 44 06 00 0A EE FF A0 0A   #寫入EEPROM位址0x000A,資料為0xEEFF
 
 

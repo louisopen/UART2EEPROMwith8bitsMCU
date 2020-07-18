@@ -121,7 +121,7 @@ void ReadyToHalt()
 	_pb = 0x0f;
 	_pbs1 = 0;
 	*/		
-	Disable_ADC();	
+	//Disable_ADC();	
 	Uart_off();
 	_t1on  = 0;
 	//_regc = 0x00;
@@ -160,7 +160,7 @@ void GPIO_Init()
 	_pawu = 0b00000000; 	//default is 0.
 	_pa = 0;
 	*/
-	_pbc = 0b11111011;		//pb0 for an0, pb2 for buzzer
+	_pbc = 0b11111011;		//pb2 for buzzer
 	_pbpu =   0b11111111;		
 	_pb =0;
 	/*

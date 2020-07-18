@@ -13,8 +13,6 @@
 //___________________________________________________________________
 #include "common.h"
 
-//u16		value;
-//__16_type	adc_value;
 //___________________________________________________________________
 //___________________________________________________________________
 //___________________________________________________________________
@@ -30,8 +28,6 @@ void main()
 		WDT_ResetInit();	
 	}
 	//sleep_request=1;
-	//value = Get_ADC(AN0);			//Analog PB0
-	//adc_value.u16 = Get_ADC(AN0);	//Analog PB0
 	TEST_EEPROM(EEPROM_BUFFER_MAX);	//auto fill 0,1,2,3,~
 	//Uart_TXD_Send(0xabcd);	//test for TXD single 	
 	while(1)	//like Arduino loop() for main loop
