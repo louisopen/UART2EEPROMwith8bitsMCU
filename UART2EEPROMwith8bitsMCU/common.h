@@ -18,7 +18,6 @@
 #include "typedef.h"
 #include "EEPROM.h"		//#include "IAP.h"
 #include "Sys_Init.h"
-#include "ADC.h"
 #include "Uart.h"
 #include "interrupt.h"
 

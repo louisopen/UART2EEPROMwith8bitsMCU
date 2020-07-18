@@ -17,12 +17,13 @@
 
 
 #### How to test it:
-* PC通訊軟件做為主動工具, 協議(9600,n,8,1), 格式比照RS-485格式 
+* PC通訊軟件做為主動工具, 協議(9600,n,8,1), 格式比照RS-485格式 (PC指令CRC用 A0 0A代替, MCU反饋的為CRC-16)
 * For Example: 
 * UART Formate(Get from MCU): 44 03 00 00 00 04 A0 0A   #讀取EEPROM位址0x0000,4組(共計8個bytes)
+MCU return設計最大每次讀取四組(8byte) 反饋如: 44 03 08 00 01 02 03 04 05 06 07 CRC CRC
 
 * UART Formate(Write to MCU): 44 06 00 0A EE FF A0 0A   #寫入EEPROM位址0x000A,資料為0xEEFF
-
+MCU return: 44 06 00 0A EE FF CRC CRC
 
 #### Other:
 * UART access to ADC internal 10 bits resolution.
