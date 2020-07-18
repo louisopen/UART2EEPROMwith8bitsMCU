@@ -1,0 +1,314 @@
+
+Linker Version 8.7.7.181224
+Input Object File: C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\UART.OBJ
+Input Object File: C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\SYS_INIT.OBJ
+Input Object File: C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\EEPROM.OBJ
+Input Object File: C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\INTERRUPT.OBJ
+Input Object File: C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\ADC.OBJ
+Input Object File: C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\STARTUP1_L.OBJ
+Input Object File: C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\UARTTOEEPROM.OBJ
+
+Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB
+Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\v3_tabrd_mrsc.lib
+
+
+     Bank    Start     End      Length     Class    AvgIns    Name
+     00h     0000h     0000h    0001h      CODE               @code (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\UARTTOEEPROM.OBJ)
+     00h     0001h     0001h    0001h      CODE               @start (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\UARTTOEEPROM.OBJ)
+     00h     0002h     0003h    0002h      CODE               _Key_Scan (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\SYS_INIT.OBJ)
+     00h     0004h     0004h    0001h      CODE               @INT0_ISR_code (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\INTERRUPT.OBJ)
+     00h     0005h     0006h    0002h      CODE               _Disable_ADC (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\ADC.OBJ)
+     00h     0008h     0008h    0001h      CODE               @Comparator_ISR_code (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\INTERRUPT.OBJ)
+     00h     000ch     000ch    0001h      CODE               @MuFunction0_ISR_code (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\INTERRUPT.OBJ)
+     00h     0010h     0010h    0001h      CODE               @MuFunction1_ISR_code (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\INTERRUPT.OBJ)
+     00h     0014h     0014h    0001h      CODE               @MuFunction2_ISR_code (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\INTERRUPT.OBJ)
+     00h     0018h     0018h    0001h      CODE               @ADC_ISR_code (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\INTERRUPT.OBJ)
+     00h     001ch     001fh    0004h      CODE               @Timebase0_ISR_code (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\INTERRUPT.OBJ)
+     00h     0020h     0023h    0004h      CODE               @Timebase1_ISR_code (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\INTERRUPT.OBJ)
+     00h     0024h     0024h    0001h      CODE               @INT1_ISR_code (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\INTERRUPT.OBJ)
+     00h     0028h     0028h    0001h      CODE               @I2C_ISR_code (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\INTERRUPT.OBJ)
+     00h     002ch     002fh    0004h      CODE               @UART_ISR_code (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\UART.OBJ)
+     00h     0030h     0042h    0013h      CODE               _Uart_Init (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\UART.OBJ)
+     00h     0043h     0046h    0004h      CODE               _Uart_off (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\UART.OBJ)
+     00h     0047h     00aah    0064h      CODE               _UART_ISR (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\UART.OBJ)
+     00h     00abh     00dfh    0035h      CODE               _calc_crc (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\UART.OBJ)
+     00h     00e0h     0113h    0034h      CODE               _Buffer_Send6 (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\UART.OBJ)
+     00h     0114h     0149h    0036h      CODE               _Buffer_Send3 (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\UART.OBJ)
+     00h     014ah     01b2h    0069h      CODE               _Uart_RXD_Manage (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\UART.OBJ)
+     00h     01b3h     01c2h    0010h      CODE               _Task_500ms (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\SYS_INIT.OBJ)
+     00h     01c3h     01c8h    0006h      CODE               _ReadyToHalt (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\SYS_INIT.OBJ)
+     00h     01c9h     01cdh    0005h      CODE               _GPIO_Init (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\SYS_INIT.OBJ)
+     00h     01ceh     01e6h    0019h      CODE               _WDT_ResetInit (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\SYS_INIT.OBJ)
+     00h     01e7h     01f2h    000ch      CODE               _PowerOn_Init (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\SYS_INIT.OBJ)
+     00h     01f3h     020ch    001ah      CODE               _Ram_Init (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\SYS_INIT.OBJ)
+     00h     020dh     0224h    0018h      CODE               _Read_EEPROM (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\EEPROM.OBJ)
+     00h     0225h     023ch    0018h      CODE               _Write_EEPROM (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\EEPROM.OBJ)
+     00h     023dh     0265h    0029h      CODE               _TEST_EEPROM (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\EEPROM.OBJ)
+     00h     0266h     026ah    0005h      CODE               _Timebase0_ISR (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\INTERRUPT.OBJ)
+     00h     026bh     026fh    0005h      CODE               _Timebase1_ISR (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\INTERRUPT.OBJ)
+     00h     0270h     02bah    004bh      CODE               _Get_ADC (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\ADC.OBJ)
+     00h     02bbh     02ceh    0014h      CODE               _main (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\UARTTOEEPROM.OBJ)
+     00h     02cfh     02d8h    000ah      CODE               __DELAYX (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     02d9h     02ddh    0005h      CODE               _CROM2PROM (CROM2PROM)
+     00h     00a0h     00bdh    001eh      DATA     2.7333    @HCCINIT0 (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\UART.OBJ)
+     00h     00beh     00bfh    0002h      DATA     3.5       @HCCINIT0 (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\SYS_INIT.OBJ)
+     00h     00c0h     00c0h    0001h      DATA     3         @HCCINIT0 (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\INTERRUPT.OBJ)
+     00h     00c1h     00c1h    0001h      DATA     48        @data_ra (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00c2h     00c2h    0001h      DATA     29        @data_rb (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00c3h     00c3h    0001h      DATA     20        @data_rc (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00c4h     00c4h    0001h      DATA     6         @data_rd (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00c5h     00c5h    0001h      DATA     6         @data_re (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00c6h     00c6h    0001h      DATA     2         @data_rf (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00c7h     00c7h    0001h      DATA     2         @data_r12c (isr:ra~rh)
+     00h     00c8h     00c8h    0001h      DATA     2         @data_r22c (isr:ra~rh)
+     00h     00c9h     00c9h    0001h      DATA     2         @data_r32c (isr:ra~rh)
+     00h     00cah     00cah    0001h      DATA     2         @data_r42c (isr:ra~rh)
+     00h     00cbh     00cbh    0001h      DATA     2         @data_r52c (isr:ra~rh)
+     00h     00cch     00cch    0001h      DATA     2         @data_r62c (isr:ra~rh)
+     00h     00cdh     00cdh    0001h      DATA     2         @data_r72c (isr:ra~rh)
+     00h     00ceh     00ceh    0001h      DATA     7         @data_ra2c (isr:ra~rh)
+     00h     00cfh     00cfh    0001h      DATA     2         @data_r11c (isr:ra~rh)
+     00h     00d0h     00d0h    0001h      DATA     2         @data_r21c (isr:ra~rh)
+     00h     00d1h     00d1h    0001h      DATA     2         @data_r120 (isr:ra~rh)
+     00h     00d2h     00d2h    0001h      DATA     2         @data_r220 (isr:ra~rh)
+
+     Local Sections
+
+     Bank    Start     End      Length     Class    AvgIns    Name
+     00h     00d3h     00d3h    0000h      LOCAL    0         @dummy44 (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\UART.OBJ)
+     00h     00d3h     00d3h    0000h      LOCAL    0         _UART_ISR (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\UART.OBJ)
+     00h     00d3h     00d3h    0000h      LOCAL    0         _Crom2Prom (CROM2PROM)
+     00h     00d3h     00d3h    0000h      LOCAL    0         @dummy28 (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\INTERRUPT.OBJ)
+     00h     00d3h     00d3h    0000h      LOCAL    0         _Timebase0_ISR (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\INTERRUPT.OBJ)
+     00h     00d3h     00d3h    0000h      LOCAL    0         @dummy32 (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\INTERRUPT.OBJ)
+     00h     00d3h     00d3h    0000h      LOCAL    0         _Timebase1_ISR (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\INTERRUPT.OBJ)
+     00h     00dah     00dah    0000h      LOCAL    0         @dummy (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\UARTTOEEPROM.OBJ)
+     00h     00dah     00dah    0000h      LOCAL    0         _main (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\UARTTOEEPROM.OBJ)
+     00h     00d3h     00d3h    0000h      LOCAL    0         _Ram_Init (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\SYS_INIT.OBJ)
+     00h     00d3h     00d3h    0000h      LOCAL    0         _PowerOn_Init (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\SYS_INIT.OBJ)
+     00h     00d3h     00d3h    0000h      LOCAL    0         _WDT_ResetInit (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\SYS_INIT.OBJ)
+     00h     00d3h     00d3h    0000h      LOCAL    0         _GPIO_Init (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\SYS_INIT.OBJ)
+     00h     00d3h     00d3h    0000h      LOCAL    0         _Uart_Init (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\UART.OBJ)
+     00h     00d5h     00d8h    0004h      LOCAL    4.25      _TEST_EEPROM (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\EEPROM.OBJ)
+     00h     00d3h     00d4h    0002h      LOCAL    2.5       _Write_EEPROM (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\EEPROM.OBJ)
+     00h     00d3h     00d3h    0001h      LOCAL    2         _Read_EEPROM (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\EEPROM.OBJ)
+     00h     00d7h     00d9h    0003h      LOCAL    3.6667    _Uart_RXD_Manage (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\UART.OBJ)
+     00h     00d6h     00d6h    0001h      LOCAL    2         _Buffer_Send6 (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\UART.OBJ)
+     00h     00d3h     00d5h    0003h      LOCAL    4         _calc_crc (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\UART.OBJ)
+     00h     00d3h     00d3h    0001h      LOCAL    1         _Get_ADC (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\ADC.OBJ)
+     00h     00d3h     00d3h    0000h      LOCAL    0         __DELAYX (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00d6h     00d6h    0001h      LOCAL    3         _Buffer_Send3 (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\UART.OBJ)
+     00h     00d3h     00d3h    0000h      LOCAL    0         _ReadyToHalt (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\SYS_INIT.OBJ)
+     00h     00d3h     00d3h    0000h      LOCAL    0         _Disable_ADC (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\ADC.OBJ)
+     00h     00d3h     00d3h    0000h      LOCAL    0         _Uart_off (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\UART.OBJ)
+     00h     00d3h     00d3h    0000h      LOCAL    0         _Task_500ms (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\SYS_INIT.OBJ)
+     00h     00d3h     00d3h    0000h      LOCAL    0         _Key_Scan (C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\SYS_INIT.OBJ)
+
+     Public Symbols Information
+     Address            Public by Name
+     0018h              _ADC_ISR
+     0114h              _Buffer_Send3
+     00e0h              _Buffer_Send6
+     0008h              _Comparator_ISR
+     02dah              _Crom2Prom
+     02d9h              _Crom2PromNext
+     0005h              _Disable_ADC
+     01c9h              _GPIO_Init
+     0270h              _Get_ADC
+     0028h              _I2C_ISR
+     0004h              _INT0_ISR
+     0024h              _INT1_ISR
+     0002h              _Key_Scan
+     000ch              _MuFunction0_ISR
+     0010h              _MuFunction1_ISR
+     0014h              _MuFunction2_ISR
+     01e7h              _PowerOn_Init
+     01f3h              _Ram_Init
+     020dh              _Read_EEPROM
+     01c3h              _ReadyToHalt
+     023dh              _TEST_EEPROM
+     01b3h              _Task_500ms
+     0266h              _Timebase0_ISR
+     026bh              _Timebase1_ISR
+     0047h              _UART_ISR
+     0030h              _Uart_Init
+     014ah              _Uart_RXD_Manage
+     0043h              _Uart_off
+     01ceh              _WDT_ResetInit
+     0225h              _Write_EEPROM
+     02d5h              __DELAYX0
+     02d4h              __DELAYX1
+     02d3h              __DELAYX2
+     02d2h              __DELAYX3
+     02d1h              __DELAYX4
+     02d0h              __DELAYX5
+     02cfh              __DELAYX6
+     00a3h              _array_uart_rxbuff
+     00abh              _array_uart_txbuff
+     00abh              _calc_crc
+     00d3h              _calc_crc_2
+     00bfh              _count_2sec
+     00c0h              _interrupt_flag
+     02bbh              _main
+     00a0h              _reg_crc
+     00bch              _rx_guide
+     00beh              _system_flag
+     00bbh              _tx_guide
+     00bdh              _tx_index
+     00a2h              _uart_flag
+     00cfh              r11c
+     00d1h              r120
+     00c7h              r12c
+     00d0h              r21c
+     00d2h              r220
+     00c8h              r22c
+     00c9h              r32c
+     00cah              r42c
+     00cbh              r52c
+     00cch              r62c
+     00cdh              r72c
+     00c1h              ra
+     00ceh              ra2c
+     00c2h              rb
+     00c3h              rc
+     00c4h              rd
+     00c5h              re
+     00c6h              rf
+
+     Address            Public by Value
+     0002h              _Key_Scan
+     0004h              _INT0_ISR
+     0005h              _Disable_ADC
+     0008h              _Comparator_ISR
+     000ch              _MuFunction0_ISR
+     0010h              _MuFunction1_ISR
+     0014h              _MuFunction2_ISR
+     0018h              _ADC_ISR
+     0024h              _INT1_ISR
+     0028h              _I2C_ISR
+     0030h              _Uart_Init
+     0043h              _Uart_off
+     0047h              _UART_ISR
+     00a0h              _reg_crc
+     00a2h              _uart_flag
+     00a3h              _array_uart_rxbuff
+     00abh              _array_uart_txbuff
+     00abh              _calc_crc
+     00bbh              _tx_guide
+     00bch              _rx_guide
+     00bdh              _tx_index
+     00beh              _system_flag
+     00bfh              _count_2sec
+     00c0h              _interrupt_flag
+     00c1h              ra
+     00c2h              rb
+     00c3h              rc
+     00c4h              rd
+     00c5h              re
+     00c6h              rf
+     00c7h              r12c
+     00c8h              r22c
+     00c9h              r32c
+     00cah              r42c
+     00cbh              r52c
+     00cch              r62c
+     00cdh              r72c
+     00ceh              ra2c
+     00cfh              r11c
+     00d0h              r21c
+     00d1h              r120
+     00d2h              r220
+     00d3h              _calc_crc_2
+     00e0h              _Buffer_Send6
+     0114h              _Buffer_Send3
+     014ah              _Uart_RXD_Manage
+     01b3h              _Task_500ms
+     01c3h              _ReadyToHalt
+     01c9h              _GPIO_Init
+     01ceh              _WDT_ResetInit
+     01e7h              _PowerOn_Init
+     01f3h              _Ram_Init
+     020dh              _Read_EEPROM
+     0225h              _Write_EEPROM
+     023dh              _TEST_EEPROM
+     0266h              _Timebase0_ISR
+     026bh              _Timebase1_ISR
+     0270h              _Get_ADC
+     02bbh              _main
+     02cfh              __DELAYX6
+     02d0h              __DELAYX5
+     02d1h              __DELAYX4
+     02d2h              __DELAYX3
+     02d3h              __DELAYX2
+     02d4h              __DELAYX1
+     02d5h              __DELAYX0
+     02d9h              _Crom2PromNext
+     02dah              _Crom2Prom
+
+
+ROM Usage Statistics
+     Size      Used     Percentage
+     1000h     02c8h    17%
+
+RAM Usage Statistics
+    Bank      Size      Used     Percentage
+     00h       0060h     003ah    60%
+     01h       0060h     0010h    16%
+     Total     00c0h     004ah    38%
+
+Use Stack Count
+_UART_ISR: 1
+_Uart_TXD_Send: 2
+_Timebase0_ISR: 0
+_Timebase1_ISR: 0
+_TEST_ADC: 2
+_main: 4
+
+Call Tree
+    @dummy44
+        _UART_ISR (0)
+            _Crom2Prom (1)
+    _Uart_TXD_Send
+        _calc_crc (0)
+            _Crom2Prom (1)
+    @dummy28
+        _Timebase0_ISR (0)
+    @dummy32
+        _Timebase1_ISR (0)
+    _TEST_ADC
+        _Get_ADC (0)
+            __DELAYX (1)
+    @dummy
+        _main (0)
+            _Ram_Init (1)
+            _PowerOn_Init (1)
+                _WDT_ResetInit (2)
+                    _GPIO_Init (3)
+                    _Uart_Init (3)
+            _WDT_ResetInit (1)
+                _GPIO_Init (2)
+                _Uart_Init (2)
+            _TEST_EEPROM (1)
+                _Write_EEPROM (2)
+                _Read_EEPROM (2)
+            _Uart_RXD_Manage (1)
+                _Write_EEPROM (2)
+                _Buffer_Send6 (2)
+                    _calc_crc (3)
+                        _Crom2Prom (4)
+                _Get_ADC (2)
+                    __DELAYX (3)
+                _Read_EEPROM (2)
+                _Buffer_Send3 (2)
+                    _calc_crc (3)
+                        _Crom2Prom (4)
+            _ReadyToHalt (1)
+                _Disable_ADC (2)
+                _Uart_off (2)
+                _Uart_Init (2)
+            _Task_500ms (1)
+            _Key_Scan (1)
+
+HLINK: Program entry point at section '@code' (address 0) of file 'C:\ChipsGarden\醇法\MK8002D\UART2EEPROMwith8bitsMCU\UART2EEPROMwith8bitsMCU\UARTTOEEPROM.OBJ'
+
+Total 0 error(s), Total 0 Warning(s)
