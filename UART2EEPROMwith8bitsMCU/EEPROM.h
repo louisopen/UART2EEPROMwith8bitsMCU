@@ -30,6 +30,6 @@ void Write_EEPROM(unsigned char addr,unsigned char data);
 unsigned char Read_EEPROM(unsigned char addr);
 void TEST_EEPROM(u8 eeprom_length);	//For test or Debug
 
-extern volatile	unsigned char databuffer[EEPROM_BUFFER_MAX] __attribute__ ((at(0x1F0)));
+volatile	unsigned char databuffer[EEPROM_BUFFER_MAX] __attribute__ ((at(0x1F0)));
 
 #endif

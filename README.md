@@ -1,14 +1,21 @@
-## â€»UARTtoEEPROMwith8bitsMCU
-* HT-IDE3000 V7.99  HT66F317/HT66F318 28ssop
+## ¡°UARTtoEEPROMwith8bitsMCU
 * Used HT66F318 control GPIO, LED matrix, EEPROM, ADC, I2C... via UART(Same with RS-485)
-* åˆ©ç”¨Holtek MCU HT66F318 28sop UARTåšç‚ºèˆ‡EEPROM(å…§ç½®)æˆ–å…¶ä»–GPIOçš„æºé€šé€”å¾‘...é–‹å·¥å¿…å‚™å·¥å…·
-* å°ˆæ¥­ä¾¿å®œåˆå¥½ç”¨, ä¸éæ¡ˆä¾‹ç«Ÿç„¶é€™æ¨£çš„å°‘, å¤ªå¯æ†! çœ‹ä¸ä¸‹å»! 
-* é¦–é–‹ç¯„åˆ—æ˜¯ä¸€å€‹ç°¡å–®åˆ©ç”¨PCè»Ÿä»¶ä¸‹é”æŒ‡ä»¤å­˜å–MCUå…§éƒ¨çš„EEPROM(64byte), ä½†MCUå…§å­˜ç·©è¡æ•…æ„å¼„å°, å”è­°æ¯”ç…§RS-485é€šè¨Šå”è­°æ ¼å¼. 8bit MCU è³‡æºæœ‰é™æœ‰è¨±å¤šé™åˆ¶æ…¢æ…¢æŒ–æ˜å§!
-* Project Option: HXT; å¯é¸é …é‚„æœ‰(å°å¿ƒä½¿ç”¨)HXT,HIRC8M,HIRC12M,HIRC16M,LXT,LIRC<br>
+* §Q¥ÎHoltek MCU HT66F318 28sop UART°µ¬°»PEEPROM(¤º¸m)©Î¨ä¥LGPIOªº·¾³q³~®|...¶}¤u¥²³Æ¤u¨ã
+* ±M·~«K©y¤S¦n¥Î, ¤£¹L®×¨Ò³ºµM³o¼Ëªº¤Ö, ¤Ó¥i¼¦! ¬İ¤£¤U¥h! 
+* ­º¶}½d¦C¬O¤@­ÓÂ²³æ§Q¥ÎPC³n¥ó¤U¹F«ü¥O¦s¨úMCU¤º³¡ªºEEPROM(64byte), ¦ıMCU¤º¦s½w½Ä¬G·N§Ë¤p, ¨óÄ³¤ñ·ÓRS-485³q°T¨óÄ³®æ¦¡. 8bit MCU ¸ê·½¦³­­¦³³\¦h­­¨îºCºC«õ±¸§a!
 
-HT66F318 28ssop with HT-IDE3000 V8.02 & e-Link & e-WriterPro<br>
-[HT66F318 Document](https://www.holtek.com.tw/search?key=ht66F318)<br>
-[IDE3000 & ICE & Writer](https://www.holtek.com.tw/ice)<br>
+* Project Option:<br>
+HXT (External 8MHz X'tal); ¥i¿ï¶µ¦³:HXT(400K~16Mhz),HIRC8M,HIRC12M,HIRC16M<br>
+LICR (Low speed internal RC for TB0/TB1); ¥i¿ï¶µ¦³:LXT(32.768Khz),LIRC(32Khz)<br>
+
+* UART Baudrate: 9600,n,8,1 (¨óÄ³®æ¦¡°Ñ·ÓRS-485³q°T¨óÄ³®æ¦¡)<br>
+
+* TB0,1 enable LIRC interrupt for 0.514sec, 0.514sec<br>
+
+* HT-IDE3000 HT66F317/HT66F318 28ssop with HT-IDE3000 & e-Link & e-WriterPro<br>
+¤å¥ó[HT66F318 Document](https://www.holtek.com.tw/search?key=ht66F318)<br>
+¼ÒÀÀ&°£¿ùDevelopment & Debug[IDE3000 & ICE](https://www.holtek.com.tw/web/guest/ice)<br>
+¿N¤J¾¹Progrmming & writer[HOPE3000 & e-WriterPro](https://www.holtek.com.tw/web/guest/programmer)<br>
 
 ### Relevant information
 * HT-IDE3000 V7.99
@@ -20,14 +27,17 @@ HT66F318 28ssop with HT-IDE3000 V8.02 & e-Link & e-WriterPro<br>
 ![Image](ProjectOption2.jpg)
 ![Image](ProjectOption3.jpg)
 ![Image](ProjectOption4.jpg)
+* HT66F318 28ssop Schematic Diagram
+![Image](CircuitDiagram.jpg)
+![Image](MCUdiagram.jpg)
 
 ### How to test it
-* PCé€šè¨Šè»Ÿä»¶åšç‚ºä¸»å‹•å·¥å…·, å”è­°(9600,n,8,1), æ ¼å¼æ¯”ç…§RS-485æ ¼å¼ (PCæŒ‡ä»¤CRCç”¨ A0 0Aä»£æ›¿, MCUåé¥‹çš„ç‚ºCRC-16)
+* PC³q°T³n¥ó°µ¬°¥D°Ê¤u¨ã, ¨óÄ³(9600,n,8,1), ®æ¦¡¤ñ·ÓRS-485®æ¦¡ (PC«ü¥OCRC¥Î A0 0A¥N´À, MCU¤ÏõXªº¬°CRC-16)
 * For Example: 
-* UART Formate(Get from MCU): 44 03 00 00 00 04 A0 0A   #è®€å–EEPROMä½å€0x0000,4çµ„(å…±è¨ˆ8å€‹bytes)
-MCU returnè¨­è¨ˆæœ€å¤§æ¯æ¬¡è®€å–å››çµ„(8byte) åé¥‹å¦‚: 44 03 08 00 01 02 03 04 05 06 07 CRC CRC
+* UART Formate(Get from MCU): 44 03 00 00 00 04 A0 0A   #Åª¨úEEPROM¦ì§}0x0000,4²Õ(¦@­p8­Óbytes)
+MCU return³]­p³Ì¤j¨C¦¸Åª¨ú¥|²Õ(8byte) ¤ÏõX¦p: 44 03 08 00 01 02 03 04 05 06 07 CRC CRC
 
-* UART Formate(Write to MCU): 44 06 00 0A EE FF A0 0A   #å¯«å…¥EEPROMä½å€0x000A,è³‡æ–™ç‚º0xEEFF
+* UART Formate(Write to MCU): 44 06 00 0A EE FF A0 0A   #¼g¤JEEPROM¦ì§}0x000A,¸ê®Æ¬°0xEEFF
 MCU return: 44 06 00 0A EE FF CRC CRC
 
 ### Other

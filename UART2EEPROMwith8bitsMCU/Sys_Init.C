@@ -23,7 +23,12 @@ volatile unsigned char  count_2sec;
 volatile __byte_type	system_flag;
 void Task_500ms()
 {	//TimeBase0
-	if(TB0_int_flag==0) return;
+	//if(TB0_int_flag==0) return;
+	//TB0_int_flag=0;
+	//TimeBase1
+	if(TB1_int_flag==0) return;
+	TB1_int_flag=0;
+	
 	count_2sec++;
 	if(count_2sec < 4) return;
 	count_2sec=0;
@@ -58,7 +63,6 @@ void Key_Scan()
 //___________________________________________________________________
 void WDT_ResetInit()	//WDT ·¸¥X´_¦ì
 {
-	GPIO_Init();
  	Uart_Init();	
 	//Enable_ADC();
 		
@@ -93,20 +97,19 @@ void WDT_ResetInit()	//WDT ·¸¥X´_¦ì
 //___________________________________________________________________
 void PowerOn_Init() //power up or reset pin normal
 {
-  	SETHXT();	//fH source is external Hi speed
+  	//SETHXT();			//fH source is external Hi speed
+	Fsys_select();
   	
 	//LVR low voltage reset select
 	//SETLVR_Voltage1_9();
 	SETLVR_Voltage2_55();
 	//SETLVR_Voltage3_15();
 
-	//WDT select
+	//GPIO configurations
+	GPIO_Init();
+
+	//WDT select & initial
 	SETWDTtime8192ms();		//WDT timer enable.
-	
-	//GPIO control
-	WDT_ResetInit();
-	
-	//SAVE_REEPROM();	
 }
 //___________________________________________________________________
 //Function: Enter to HLAT mode
@@ -115,12 +118,6 @@ void PowerOn_Init() //power up or reset pin normal
 //___________________________________________________________________
 void ReadyToHalt()
 {
-	/*	
-  	_nop();
-	_pbc = 0x0f;
-	_pb = 0x0f;
-	_pbs1 = 0;
-	*/		
 	//Disable_ADC();	
 	Uart_off();
 	_t1on  = 0;
@@ -153,19 +150,17 @@ void ReadyToHalt()
 //	  NOTE: Base scription
 //___________________________________________________________________
 void GPIO_Init()
-{
-	/*
-	_pac = 0b11100111;
-	_papu = 0b11100111;	
-	_pawu = 0b00000000; 	//default is 0.
-	_pa = 0;
-	*/
+{	
+	_acerl=0B00000001;	//binding IO  pb0,pb1,pb2,pa4,pa5,pa6,pa7,pb3 see you.
+	_scomc=0B00000000;	//binding IO  ...SCOMEN,pb5,pb6,pa3,pa1 see you
+	_cpc=0B00001001;	//binding IO  (pb5,pb6,pa3) see you
+
 	_pbc = 0b11111011;		//pb2 for buzzer
-	_pbpu =   0b11111111;		
+	_pbpu =   0b11111111;	//default is 0(disable).		
 	_pb =0;
 	/*
 	_pcc = 0xff;
-	_pcpu = 0b11111111;		
+	_pcpu = 0b11111111;		//default is 0(disable).
 	_pc = 0;
 	*/
 	/*

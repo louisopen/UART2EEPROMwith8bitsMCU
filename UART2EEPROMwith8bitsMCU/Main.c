@@ -21,7 +21,8 @@ void main()
 	if(_to ==0 || _pdf ==0)		//power up or reset pin normal.
 	{	//上電復位或者是正常情況下的非正常復位
 		Ram_Init();		//RAM clear all, first time power up.
-		PowerOn_Init();	//第一次上電或正常reset pin                             								
+		PowerOn_Init();	//第一次上電或正常reset pin   
+		WDT_ResetInit();                          								
 	}
 	else//Watch dog reset 													
 	{	//WDT造成溢出的復位
