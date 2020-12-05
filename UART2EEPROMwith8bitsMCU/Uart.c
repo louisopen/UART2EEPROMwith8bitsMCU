@@ -34,14 +34,13 @@
 #define		BRGData        				51		  //8Mhz  Baud=9600,BRGH=1,N=51 
 
 u8	tx_index;
-volatile	u8	rx_guide;
-volatile	u8	tx_guide;
-volatile	u8	array_uart_txbuff[TX_DATA_MAX];
-volatile	u8	array_uart_rxbuff[RX_DATA_MAX];
-volatile	__byte_type	uart_flag;	//bit operation
+u8	rx_guide;
+u8	tx_guide;
+u8	array_uart_txbuff[TX_DATA_MAX];
+u8	array_uart_rxbuff[RX_DATA_MAX];
 
 u16 reg_crc;
-u16 calc_crc(u8* pointer, u8 length);
+u16 calc_crc(u8 *pointer, u8 length);
 
 //___________________________________________________________________
 //Function: UART initial
@@ -97,12 +96,12 @@ void Uart_off(void)
 //void UART_ISR(void)
 void __attribute((interrupt(0x2C)))  UART_ISR()		//for V3 of compiler
 {	
-	u8	isr_temp0;
+	//u8	isr_temp0;
 	//clear urf flag
 	if(_perr || _nf || _ferr || _oerr)	// error found?
 	{
-	   isr_temp0 = _usr;				//read USR to clear error flag 
-	   isr_temp0 = _txr_rxr;			//read USR to clear error flag 	   	       
+	   _acc = _usr;				//read USR to clear error flag 
+	   _acc = _txr_rxr;			//read USR to clear error flag 	   	       
 	}
 	else	// no error found
 	{
@@ -118,7 +117,7 @@ void __attribute((interrupt(0x2C)))  UART_ISR()		//for V3 of compiler
 				rx_guide++;
 				if(rx_guide==RX_DATA_MAX && array_uart_rxbuff[rx_guide-1]==0x0A)	
 				{
-					rx_success=1;		//Finished for application
+					uart_rx_success=1;		//Finished for application
 				}											
 				//if(rx_guide==RX_DATA_MAX || array_uart_rxbuff[2]==(rx_guide-4))	//length of the Modbus slave
 				//{
@@ -160,9 +159,9 @@ void __attribute((interrupt(0x2C)))  UART_ISR()		//for V3 of compiler
 void Uart_RXD_Manage(void)
 {
 	u8 i;
-	if(rx_success == 1)	//Is't finished ?
+	if(uart_rx_success == 1)	//Is't finished ?
 	{
-		rx_success = 0;
+		uart_rx_success = 0;
 		if(array_uart_rxbuff[0] == 0x44 && array_uart_rxbuff[RX_DATA_MAX-1]==0x0A)
 		{
 			switch(array_uart_rxbuff[1])	//functions
@@ -303,7 +302,7 @@ void Buffer_Send3(u8 count)
 //   INPUT: buffer, number of counting
 //	  NOTE: also Modbus standar.
 //___________________________________________________________________
-u16 calc_crc(u8* pointer,u8 length)
+u16 calc_crc(u8 *pointer,u8 length)
 {
 	u8 i,j;
 	reg_crc = 0xFFFF;

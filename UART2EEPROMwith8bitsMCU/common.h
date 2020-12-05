@@ -21,10 +21,15 @@
 #include "Uart.h"
 #include "interrupt.h"
 
-extern volatile	__byte_type	system_flag;
+#define TB0_int_flag	interrupt_flag.bits.b0
+#define TB1_int_flag	interrupt_flag.bits.b1
+
+#define uart_rx_success interrupt_flag.bits.b3
+
 #define toggle_led		system_flag.bits.b0
 #define toggle_buzzer	system_flag.bits.b1
 #define sleep_request	system_flag.bits.b2
+
 
 
 #endif

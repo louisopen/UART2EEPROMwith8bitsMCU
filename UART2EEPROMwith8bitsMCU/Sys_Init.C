@@ -13,14 +13,14 @@
 //___________________________________________________________________
 #include "common.h"
 
+unsigned char  count_2sec;
+volatile __byte_type	system_flag;
 
 //___________________________________________________________________
 //Function: Time base timer task process
 //   INPUT: 
 //	  NOTE:
 //___________________________________________________________________
-volatile unsigned char  count_2sec;
-volatile __byte_type	system_flag;
 void Task_500ms()
 {	//TimeBase0
 	//if(TB0_int_flag==0) return;

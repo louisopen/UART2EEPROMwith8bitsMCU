@@ -77,7 +77,7 @@ void Write_EEPROM(unsigned char addr,unsigned char data)
 //  OUTPUT: none
 //	  NOTE: Demo Read / Write internal EEPROM only 
 //___________________________________________________________________
-static volatile	unsigned char databuffer[EEPROM_BUFFER_MAX] __attribute__ ((at(0x1F0)));
+//static volatile	unsigned char databuffer[EEPROM_BUFFER_MAX] __attribute__ ((at(0x1F0)));
 void TEST_EEPROM(u8 eeprom_length)	//auto fill all it
 {
 	//volatile	u8	datatemp[64],i;

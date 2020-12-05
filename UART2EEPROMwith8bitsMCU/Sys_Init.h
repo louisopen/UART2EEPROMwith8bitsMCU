@@ -14,13 +14,11 @@
 #ifndef SYS_INIT_H_
 #define SYS_INIT_H_
 
-extern volatile unsigned char  count_2sec;
+extern unsigned char  count_2sec;
+extern volatile __byte_type	system_flag;
 
-void PowerOn_Init();
-void WDT_ResetInit();
-void GPIO_Init();
-void Ram_Init();
-void PrepareToHalt();
+extern void PowerOn_Init(), WDT_ResetInit(), GPIO_Init(), Ram_Init(), ReadyToHalt();
+extern void Task_500ms(), Key_Scan();
 
 //___________________________________________________________________
 //___________________________________________________________________

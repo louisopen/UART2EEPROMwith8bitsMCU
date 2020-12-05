@@ -5,8 +5,9 @@
 * 首開範列是一個簡單利用PC軟件下達指令存取MCU內部的EEPROM(64byte), 但MCU內存緩衝故意弄小, 協議比照RS-485通訊協議格式. 8bit MCU 資源有限有許多限制慢慢挖掘吧!
 
 * Project Option:<br>
-HXT (External 8MHz X'tal); 可選項有:HXT(400K~16Mhz),HIRC8M,HIRC12M,HIRC16M<br>
-LICR (Low speed internal RC for TB0/TB1); 可選項有:LXT(32.768Khz),LIRC(32Khz)<br>
+HXT (External 8MHz X'tal): 可選項有:HXT(400K~16Mhz),HIRC4M,HIRC8M,HIRC12M<br>
+LICR (Low speed internal RC for TB0/TB1): 可選項有:LXT(32.768Khz),LIRC(32Khz)<br>
+WatchDog: enable<br>
 
 * UART Baudrate: 9600,n,8,1 (協議格式參照RS-485通訊協議格式)<br>
 

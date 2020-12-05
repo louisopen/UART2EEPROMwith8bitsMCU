@@ -35,7 +35,5 @@
 #define UART_VECTOR		    	0x02c		// UART (ht66F318 only)
 
 extern	volatile	__byte_type	interrupt_flag;
-#define TB0_int_flag	interrupt_flag.bits.b0
-#define TB1_int_flag	interrupt_flag.bits.b1
 
 #endif
